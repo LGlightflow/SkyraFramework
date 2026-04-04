@@ -12,7 +12,7 @@ struct FGameplayAbilitySpecHandle;
 
 class AActor;
 class AController;
-class ASkyraCharacter;
+//class ASkyraCharacter;
 class ASkyraPlayerController;
 class APlayerController;
 class FText;
@@ -110,8 +110,8 @@ public:
 	UFUNCTION(BlueprintCallable, Category = "Skyra|Ability")
 	AController* GetControllerFromActorInfo() const;
 
-	UFUNCTION(BlueprintCallable, Category = "Skyra|Ability")
-	ASkyraCharacter* GetSkyraCharacterFromActorInfo() const;
+	// UFUNCTION(BlueprintCallable, Category = "Skyra|Ability")
+	// ASkyraCharacter* GetSkyraCharacterFromActorInfo() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Skyra|Ability")
 	USkyraHeroComponent* GetHeroComponentFromActorInfo() const;

@@ -12,7 +12,7 @@
 #include "Player/SkyraPlayerController.h"
 #include "Player/SkyraPlayerBotController.h"
 #include "Player/SkyraPlayerState.h"
-#include "Character/SkyraCharacter.h"
+//#include "Character/SkyraCharacter.h"
 #include "UI/SkyraHUD.h"
 #include "Character/SkyraPawnExtensionComponent.h"
 #include "Character/SkyraPawnData.h"
@@ -38,7 +38,7 @@ ASkyraGameMode::ASkyraGameMode(const FObjectInitializer& ObjectInitializer)
 	PlayerControllerClass = ASkyraPlayerController::StaticClass();
 	ReplaySpectatorPlayerControllerClass = ASkyraReplayPlayerController::StaticClass();
 	PlayerStateClass = ASkyraPlayerState::StaticClass();
-	DefaultPawnClass = ASkyraCharacter::StaticClass();
+	//DefaultPawnClass = ASkyraCharacter::StaticClass();
 	HUDClass = ASkyraHUD::StaticClass();
 }
 

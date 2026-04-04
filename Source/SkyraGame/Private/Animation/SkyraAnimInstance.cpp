@@ -2,8 +2,8 @@
 
 #include "SkyraAnimInstance.h"
 #include "AbilitySystemGlobals.h"
-#include "Character/SkyraCharacter.h"
-#include "Character/SkyraCharacterMovementComponent.h"
+//#include "Character/SkyraCharacter.h"
+//#include "Character/SkyraCharacterMovementComponent.h"
 
 #if WITH_EDITOR
 #include "Misc/DataValidation.h"
@@ -52,14 +52,14 @@ void USkyraAnimInstance::NativeUpdateAnimation(float DeltaSeconds)
 {
 	Super::NativeUpdateAnimation(DeltaSeconds);
 
-	const ASkyraCharacter* Character = Cast<ASkyraCharacter>(GetOwningActor());
-	if (!Character)
-	{
-		return;
-	}
+	// const ASkyraCharacter* Character = Cast<ASkyraCharacter>(GetOwningActor());
+	// if (!Character)
+	// {
+	// 	return;
+	// }
 
-	USkyraCharacterMovementComponent* CharMoveComp = CastChecked<USkyraCharacterMovementComponent>(Character->GetCharacterMovement());
-	const FSkyraCharacterGroundInfo& GroundInfo = CharMoveComp->GetGroundInfo();
-	GroundDistance = GroundInfo.GroundDistance;
+	// USkyraCharacterMovementComponent* CharMoveComp = CastChecked<USkyraCharacterMovementComponent>(Character->GetCharacterMovement());
+	// const FSkyraCharacterGroundInfo& GroundInfo = CharMoveComp->GetGroundInfo();
+	// GroundDistance = GroundInfo.GroundDistance;
 }
 

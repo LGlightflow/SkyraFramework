@@ -5,7 +5,7 @@
 #include "AbilitySystem/SkyraAbilitySystemComponent.h"
 #include "AbilitySystemLog.h"
 #include "Player/SkyraPlayerController.h"
-#include "Character/SkyraCharacter.h"
+//#include "Character/SkyraCharacter.h"
 #include "SkyraGameplayTags.h"
 #include "SkyraAbilityCost.h"
 #include "Character/SkyraHeroComponent.h"
@@ -89,10 +89,10 @@ AController* USkyraGameplayAbility::GetControllerFromActorInfo() const
 	return nullptr;
 }
 
-ASkyraCharacter* USkyraGameplayAbility::GetSkyraCharacterFromActorInfo() const
-{
-	return (CurrentActorInfo ? Cast<ASkyraCharacter>(CurrentActorInfo->AvatarActor.Get()) : nullptr);
-}
+// ASkyraCharacter* USkyraGameplayAbility::GetSkyraCharacterFromActorInfo() const
+// {
+// 	return (CurrentActorInfo ? Cast<ASkyraCharacter>(CurrentActorInfo->AvatarActor.Get()) : nullptr);
+// }
 
 USkyraHeroComponent* USkyraGameplayAbility::GetHeroComponentFromActorInfo() const
 {

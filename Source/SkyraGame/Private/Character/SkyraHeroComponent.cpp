@@ -11,7 +11,7 @@
 #include "Player/SkyraLocalPlayer.h"
 #include "Character/SkyraPawnExtensionComponent.h"
 #include "Character/SkyraPawnData.h"
-#include "Character/SkyraCharacter.h"
+//#include "Character/SkyraCharacter.h"
 #include "AbilitySystem/SkyraAbilitySystemComponent.h"
 #include "Input/SkyraInputConfig.h"
 #include "Input/SkyraInputComponent.h"
@@ -286,7 +286,7 @@ void USkyraHeroComponent::InitializePlayerInput(UInputComponent* PlayerInputComp
 					SkyraIC->BindNativeAction(InputConfig, SkyraGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move, /*bLogIfNotFound=*/ false);
 					SkyraIC->BindNativeAction(InputConfig, SkyraGameplayTags::InputTag_Look_Mouse, ETriggerEvent::Triggered, this, &ThisClass::Input_LookMouse, /*bLogIfNotFound=*/ false);
 					SkyraIC->BindNativeAction(InputConfig, SkyraGameplayTags::InputTag_Look_Stick, ETriggerEvent::Triggered, this, &ThisClass::Input_LookStick, /*bLogIfNotFound=*/ false);
-					SkyraIC->BindNativeAction(InputConfig, SkyraGameplayTags::InputTag_Crouch, ETriggerEvent::Triggered, this, &ThisClass::Input_Crouch, /*bLogIfNotFound=*/ false);
+					//SkyraIC->BindNativeAction(InputConfig, SkyraGameplayTags::InputTag_Crouch, ETriggerEvent::Triggered, this, &ThisClass::Input_Crouch, /*bLogIfNotFound=*/ false);
 					SkyraIC->BindNativeAction(InputConfig, SkyraGameplayTags::InputTag_AutoRun, ETriggerEvent::Triggered, this, &ThisClass::Input_AutoRun, /*bLogIfNotFound=*/ false);
 				}
 			}
@@ -449,13 +449,13 @@ void USkyraHeroComponent::Input_LookStick(const FInputActionValue& InputActionVa
 	}
 }
 
-void USkyraHeroComponent::Input_Crouch(const FInputActionValue& InputActionValue)
-{
-	if (ASkyraCharacter* Character = GetPawn<ASkyraCharacter>())
-	{
-		Character->ToggleCrouch();
-	}
-}
+// void USkyraHeroComponent::Input_Crouch(const FInputActionValue& InputActionValue)
+// {
+// 	if (ASkyraCharacter* Character = GetPawn<ASkyraCharacter>())
+// 	{
+// 		Character->ToggleCrouch();
+// 	}
+// }
 
 void USkyraHeroComponent::Input_AutoRun(const FInputActionValue& InputActionValue)
 {

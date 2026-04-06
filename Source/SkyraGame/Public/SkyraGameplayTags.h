@@ -19,6 +19,7 @@ namespace SkyraGameplayTags
 
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_Behavior_SurvivesDeath);
 
+	// TODO:这里的input考虑去掉
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Move);
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Look_Mouse);
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Look_Stick);
@@ -50,6 +51,7 @@ namespace SkyraGameplayTags
 	SKYRAGAME_API	extern const TMap<uint8, FGameplayTag> MovementModeTagMap;
 	SKYRAGAME_API	extern const TMap<uint8, FGameplayTag> CustomMovementModeTagMap;
 
+	//MovementComp里的，TODO:处理
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Movement_Mode_Walking);
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Movement_Mode_NavWalking);
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Movement_Mode_Falling);

@@ -52,6 +52,9 @@ public class SkyraEditor : ModuleRules
 
         PrivateDependencyModuleNames.AddRange(
             new string[] {
+				"AssetTools",
+				"EditorScriptingUtilities",
+				"Blutility",
 				"InputCore",
 				"Slate",
 				"SlateCore",

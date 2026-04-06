@@ -42,6 +42,7 @@ public:
 	//~End of ILoadingProcessInterface
 
 	// Tries to set the current experience, either a UI or gameplay one
+	// 设置并加载当前experience
 	void SetCurrentExperience(FPrimaryAssetId ExperienceId);
 
 	// Ensures the delegate is called once the experience has been loaded,

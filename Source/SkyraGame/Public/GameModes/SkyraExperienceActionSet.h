@@ -9,6 +9,8 @@ class UGameFeatureAction;
 
 /**
  * Definition of a set of actions to perform as part of entering an experience
+ * 把不同experience中可以复用的操作提取出来
+ * 写法类似ExperienceDefinition
  */
 UCLASS(BlueprintType, NotBlueprintable)
 class USkyraExperienceActionSet : public UPrimaryDataAsset
@@ -32,6 +34,7 @@ public:
 
 public:
 	// List of actions to perform as this experience is loaded/activated/deactivated/unloaded
+	// 这个experience在加载/激活/停用/卸载时要执行的操作列表
 	UPROPERTY(EditAnywhere, Instanced, Category="Actions to Perform")
 	TArray<TObjectPtr<UGameFeatureAction>> Actions;
 

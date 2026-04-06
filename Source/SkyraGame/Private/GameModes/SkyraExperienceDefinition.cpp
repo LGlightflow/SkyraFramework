@@ -21,6 +21,7 @@ EDataValidationResult USkyraExperienceDefinition::IsDataValid(FDataValidationCon
 	EDataValidationResult Result = CombineDataValidationResults(Super::IsDataValid(Context), EDataValidationResult::Valid);
 
 	int32 EntryIndex = 0;
+	// 遍历Action，检查每个UGameFeatureAction是否有效
 	for (const UGameFeatureAction* Action : Actions)
 	{
 		if (Action)
@@ -37,6 +38,7 @@ EDataValidationResult USkyraExperienceDefinition::IsDataValid(FDataValidationCon
 		++EntryIndex;
 	}
 
+	//查当前类是否是原生类（C++ 类），如果当前类是 Blueprint 子类，则进一步检查其父类是否是原生类。
 	// Make sure users didn't subclass from a BP of this (it's fine and expected to subclass once in BP, just not twice)
 	if (!GetClass()->IsNative())
 	{
@@ -48,7 +50,8 @@ EDataValidationResult USkyraExperienceDefinition::IsDataValid(FDataValidationCon
 		{
 			FirstNativeParent = FirstNativeParent->GetSuperClass();
 		}
-
+		
+		//如果发现 Blueprint 类继承了另一个 Blueprint 类，则添加错误信息并标记为Invalid
 		if (FirstNativeParent != ParentClass)
 		{
 			Context.AddError(FText::Format(LOCTEXT("ExperienceInheritenceIsUnsupported", "Blueprint subclasses of Blueprint experiences is not currently supported (use composition via ActionSets instead). Parent class was {0} but should be {1}."), 

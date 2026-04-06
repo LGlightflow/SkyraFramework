@@ -54,9 +54,11 @@ USkyraExperienceManagerComponent::USkyraExperienceManagerComponent(const FObject
 }
 
 void USkyraExperienceManagerComponent::SetCurrentExperience(FPrimaryAssetId ExperienceId)
-{
+{	
+	// 从 USkyraAssetManager 获取 ExperienceId 对应的资源路径。
 	USkyraAssetManager& AssetManager = USkyraAssetManager::Get();
 	FSoftObjectPath AssetPath = AssetManager.GetPrimaryAssetPath(ExperienceId);
+	//加载ExperienceDefinition类并检查是否有效
 	TSubclassOf<USkyraExperienceDefinition> AssetClass = Cast<UClass>(AssetPath.TryLoad());
 	check(AssetClass);
 	const USkyraExperienceDefinition* Experience = GetDefault<USkyraExperienceDefinition>(AssetClass);
@@ -64,6 +66,7 @@ void USkyraExperienceManagerComponent::SetCurrentExperience(FPrimaryAssetId Expe
 	check(Experience != nullptr);
 	check(CurrentExperience == nullptr);
 	CurrentExperience = Experience;
+	//启动加载
 	StartExperienceLoad();
 }
 

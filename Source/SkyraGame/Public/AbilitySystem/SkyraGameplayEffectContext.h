@@ -35,7 +35,8 @@ struct FSkyraGameplayEffectContext : public FGameplayEffectContext
 
 	/** Returns the ability source interface associated with the source object. Only valid on the authority. */
 	const ISkyraAbilitySourceInterface* GetAbilitySource() const;
-
+	
+	//执行HitResults和其他无法进行内存复制的成员的深拷贝
 	virtual FGameplayEffectContext* Duplicate() const override
 	{
 		FSkyraGameplayEffectContext* NewContext = new FSkyraGameplayEffectContext();

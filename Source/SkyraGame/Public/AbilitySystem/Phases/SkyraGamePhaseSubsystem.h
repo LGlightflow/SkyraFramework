@@ -53,14 +53,17 @@ public:
 	virtual void PostInitialize() override;
 
 	virtual bool ShouldCreateSubsystem(UObject* Outer) const override;
-
+	//开始Phase
 	void StartPhase(TSubclassOf<USkyraGamePhaseAbility> PhaseAbility, FSkyraGamePhaseDelegate PhaseEndedCallback = FSkyraGamePhaseDelegate());
 
 	//TODO Return a handle so folks can delete these.  They will just grow until the world resets.
 	//TODO Should we just occasionally clean these observers up?  It's not as if everyone will properly unhook them even if there is a handle.
+	
+	//Phase 开始监听
 	void WhenPhaseStartsOrIsActive(FGameplayTag PhaseTag, EPhaseTagMatchType MatchType, const FSkyraGamePhaseTagDelegate& WhenPhaseActive);
+	//Phase 结束监听
 	void WhenPhaseEnds(FGameplayTag PhaseTag, EPhaseTagMatchType MatchType, const FSkyraGamePhaseTagDelegate& WhenPhaseEnd);
-
+	//Phase 是否激活
 	UFUNCTION(BlueprintCallable, BlueprintAuthorityOnly, BlueprintPure = false, meta = (AutoCreateRefTerm = "PhaseTag"))
 	bool IsPhaseActive(const FGameplayTag& PhaseTag) const;
 
@@ -88,7 +91,9 @@ private:
 	};
 
 	TMap<FGameplayAbilitySpecHandle, FSkyraGamePhaseEntry> ActivePhaseMap;
-
+	
+	
+	// 用于监听phase的开始和结束
 	struct FPhaseObserver
 	{
 	public:

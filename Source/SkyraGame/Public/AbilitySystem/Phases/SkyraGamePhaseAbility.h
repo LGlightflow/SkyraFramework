@@ -6,9 +6,12 @@
 #include "SkyraGamePhaseAbility.generated.h"
 
 /**
- * USkyraGamePhaseAbility
+ * USkyraGamePhaseAbility(GPA)
  *
  * The base gameplay ability for any ability that is used to change the active game phase.
+ * 
+ * 可以使用 USkyraGamePhaseSubsytem从蓝图切换phase，
+ * 这会结束前一个phase的GA（如果它正在运行）并激活新GA。
  */
 UCLASS(Abstract, HideCategories = Input)
 class USkyraGamePhaseAbility : public USkyraGameplayAbility
@@ -40,6 +43,9 @@ protected:
 	// of the parent GamePhase.Playing, so changing the sub-phase to GamePhase.Playing.SuddenDeath,
 	// would stop any ability tied to GamePhase.Playing.*, but wouldn't end any ability 
 	// tied to the GamePhase.Playing phase.
+	/*
+	 * 定义此GPA所属的游戏阶段。
+	 */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Skyra|Game Phase")
 	FGameplayTag GamePhaseTag;
 };

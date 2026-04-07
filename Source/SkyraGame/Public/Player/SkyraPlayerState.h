@@ -44,6 +44,7 @@ enum class ESkyraPlayerConnectionType : uint8
  * ASkyraPlayerState
  *
  *	Base player state class used by this project.
+ *	在这个架构中AbilitySystem,Attribute,PawnData,Team都放在PS中
  */
 UCLASS(Config = Game)
 class SKYRAGAME_API ASkyraPlayerState : public AModularPlayerState, public IAbilitySystemInterface, public ISkyraTeamAgentInterface

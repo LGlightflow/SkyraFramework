@@ -37,12 +37,18 @@ UENUM(BlueprintType)
 enum class ESkyraAbilityActivationPolicy : uint8
 {
 	// Try to activate the ability when the input is triggered.
+	//触发关联的输入标签后，该技能就会激活一次。 瞄准射击 （ ADS ）、手榴弹和其他类似技能设置为输入触发时（On Input Triggered）。它们将被激活一次，如果按住按钮，它们不会自动重新激活。
 	OnInputTriggered,
 
 	// Continually try to activate the ability while the input is active.
+	//只要触发关联的输入标签，该技能就会持续处于激活状态。 GA_Weapon_Fire_Shotgun 等武器射击技能设置为输入处于激活状态时（While Input Active）。
+	//它们将播放一个发射动画蒙太奇，然后等到重新射击时间耗尽，随后该技能结束。
+	//这是因为重新触发实例化技能（Retrigger Instanced Ability）设置为false，冗余激活消息将被忽略，直到技能完成。
 	WhileInputActive,
 
 	// Try to activate the ability when an avatar is assigned.
+	//有效的Avatar分配到PlayerState时，该技能就会激活。武器填弹Gameplay技能（ GA_Weapon_AutoReload ）设置为生成时（On Spawn）。
+	//它将立即激活并被动运行，定期检查当前弹匣是否为空。该技能在Pawn未被控制之前不会结束。
 	OnSpawn
 };
 
@@ -56,12 +62,15 @@ UENUM(BlueprintType)
 enum class ESkyraAbilityActivationGroup : uint8
 {
 	// Ability runs independently of all other abilities.
+	// 该GA不会阻止或取代其他GA
 	Independent,
 
 	// Ability is canceled and replaced by other exclusive abilities.
+	// 该GA不会阻止其他exclusive（专有）GA，但如果有另一个exclusive GA被激活，则会被取消
 	Exclusive_Replaceable,
 
 	// Ability blocks all other exclusive abilities from activating.
+	//当GA运行时，不能激活其他exclusive GA
 	Exclusive_Blocking,
 
 	MAX	UMETA(Hidden)

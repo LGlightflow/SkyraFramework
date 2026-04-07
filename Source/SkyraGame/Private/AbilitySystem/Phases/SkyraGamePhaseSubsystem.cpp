@@ -44,6 +44,7 @@ bool USkyraGamePhaseSubsystem::ShouldCreateSubsystem(UObject* Outer) const
 
 bool USkyraGamePhaseSubsystem::DoesSupportWorldType(const EWorldType::Type WorldType) const
 {
+	//返回游戏运行时或者PIE
 	return WorldType == EWorldType::Game || WorldType == EWorldType::PIE;
 }
 
@@ -53,6 +54,7 @@ void USkyraGamePhaseSubsystem::StartPhase(TSubclassOf<USkyraGamePhaseAbility> Ph
 	USkyraAbilitySystemComponent* GameState_ASC = World->GetGameState()->FindComponentByClass<USkyraAbilitySystemComponent>();
 	if (ensure(GameState_ASC))
 	{
+		//创建GPA
 		FGameplayAbilitySpec PhaseSpec(PhaseAbility, 1, 0, this);
 		FGameplayAbilitySpecHandle SpecHandle = GameState_ASC->GiveAbilityAndActivateOnce(PhaseSpec);
 		FGameplayAbilitySpec* FoundSpec = GameState_ASC->FindAbilitySpecFromHandle(SpecHandle);
@@ -134,7 +136,8 @@ bool USkyraGamePhaseSubsystem::IsPhaseActive(const FGameplayTag& PhaseTag) const
 }
 
 void USkyraGamePhaseSubsystem::OnBeginPhase(const USkyraGamePhaseAbility* PhaseAbility, const FGameplayAbilitySpecHandle PhaseAbilityHandle)
-{
+{	
+	// 获取GPA的Phase tag
 	const FGameplayTag IncomingPhaseTag = PhaseAbility->GetGamePhaseTag();
 
 	UE_LOG(LogSkyraGamePhase, Log, TEXT("Beginning Phase '%s' (%s)"), *IncomingPhaseTag.ToString(), *GetNameSafe(PhaseAbility));
@@ -144,6 +147,8 @@ void USkyraGamePhaseSubsystem::OnBeginPhase(const USkyraGamePhaseAbility* PhaseA
 	if (ensure(GameState_ASC))
 	{
 		TArray<FGameplayAbilitySpec*> ActivePhases;
+		
+		//找当前所有 Active Phase
 		for (const auto& KVP : ActivePhaseMap)
 		{
 			const FGameplayAbilitySpecHandle ActiveAbilityHandle = KVP.Key;
@@ -165,6 +170,7 @@ void USkyraGamePhaseSubsystem::OnBeginPhase(const USkyraGamePhaseAbility* PhaseA
 			// Game.Playing phase will still be active, and if someone were to push another one, like,
 			// Game.Playing.ActualSuddenDeath, it would end Game.Playing.SuddenDeath phase, but Game.Playing would
 			// continue.  Similarly if we activated Game.GameOver, all the Game.Playing* phases would end.
+			// 规则处理Game.Playing Game.Playing.SuddenDeath 允许共存，但Game.Playing Game.GameOver不允许，会将GA取消掉
 			if (!IncomingPhaseTag.MatchesTag(ActivePhaseTag))
 			{
 				UE_LOG(LogSkyraGamePhase, Log, TEXT("\tEnding Phase '%s' (%s)"), *ActivePhaseTag.ToString(), *GetNameSafe(ActivePhaseAbility));
@@ -175,11 +181,13 @@ void USkyraGamePhaseSubsystem::OnBeginPhase(const USkyraGamePhaseAbility* PhaseA
 				}, true);
 			}
 		}
-
+		
+		// 记录新Phase
 		FSkyraGamePhaseEntry& Entry = ActivePhaseMap.FindOrAdd(PhaseAbilityHandle);
 		Entry.PhaseTag = IncomingPhaseTag;
 
 		// Notify all observers of this phase that it has started.
+		// 通知监听者 phase开始
 		for (const FPhaseObserver& Observer : PhaseStartObservers)
 		{
 			if (Observer.IsMatch(IncomingPhaseTag))

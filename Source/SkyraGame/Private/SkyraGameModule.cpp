@@ -17,4 +17,4 @@ class FSkyraGameModule : public FDefaultGameModuleImpl
 	}
 };
 
-IMPLEMENT_PRIMARY_GAME_MODULE(FSkyraGameModule, SkyraGame, "SkyraGame");
+IMPLEMENT_MODULE(FSkyraGameModule, SkyraGame);

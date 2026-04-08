@@ -61,7 +61,6 @@ public class SkyraGame : ModuleRules
                 "$(ModuleDir)/Public/UI/Subsystem",
                 "$(ModuleDir)/Public/UI/Weapons",
                 "$(ModuleDir)/Public/Weapons",
-				"SkyraGame"
 				
 			}
 		);

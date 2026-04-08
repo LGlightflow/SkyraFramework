@@ -59,9 +59,25 @@ protected:
 		{
 			return *CastChecked<GameDataClass>(*pResult);
 		}
-
+		
+		// 如果 DataPath 没指定，使用默认路径
+		TSoftObjectPtr<UPrimaryDataAsset> PathToLoad = DataPath;
+		if (!PathToLoad.IsValid())
+		{
+			PathToLoad = TSoftObjectPtr<UPrimaryDataAsset>(
+				FSoftObjectPath(TEXT("/SkyraFramework/DefaultGameData.DefaultGameData"))
+			);
+		}
+		
+		// 阻塞加载
+		UPrimaryDataAsset* LoadedAsset = LoadGameDataOfClass(
+			GameDataClass::StaticClass(),
+			PathToLoad,
+			GameDataClass::StaticClass()->GetFName()
+		);
+		
 		// Does a blocking load if needed
-		return *CastChecked<const GameDataClass>(LoadGameDataOfClass(GameDataClass::StaticClass(), DataPath, GameDataClass::StaticClass()->GetFName()));
+		return *CastChecked<const GameDataClass>(LoadedAsset);
 	}
 
 
@@ -81,7 +97,10 @@ protected:
 	UPrimaryDataAsset* LoadGameDataOfClass(TSubclassOf<UPrimaryDataAsset> DataClass, const TSoftObjectPtr<UPrimaryDataAsset>& DataClassPath, FPrimaryAssetType PrimaryAssetType);
 
 protected:
-
+	
+	/*[/Script/SkyraGame.SkyraAssetManager]
+	SkyraGameDataPath=/SkyraFramework/DefaultGameData.DefaultGameData*/
+	// 要在DefaultGame.ini 进行设置，否则会报错
 	// Global game data asset to use.
 	UPROPERTY(Config)
 	TSoftObjectPtr<USkyraGameData> SkyraGameDataPath;

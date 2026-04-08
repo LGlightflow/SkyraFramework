@@ -10,7 +10,6 @@ public class SkyraEditor : ModuleRules
 
 		PublicIncludePaths.AddRange(
 			new string[] {
-				"SkyraEditor",
 				"$(ModuleDir)/Public",
 				"$(ModuleDir)/Public/AssetType",				
 				"$(ModuleDir)/Public/Factory",			

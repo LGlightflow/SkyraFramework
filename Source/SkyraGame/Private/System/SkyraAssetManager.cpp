@@ -35,6 +35,7 @@ static FAutoConsoleCommand CVarDumpLoadedAssets(
 USkyraAssetManager::USkyraAssetManager()
 {
 	DefaultPawnData = nullptr;
+	SkyraGameDataPath = FSoftClassPath(TEXT("/SkyraFramework/DefaultGameData.DefaultGameData"));
 }
 
 USkyraAssetManager& USkyraAssetManager::Get()

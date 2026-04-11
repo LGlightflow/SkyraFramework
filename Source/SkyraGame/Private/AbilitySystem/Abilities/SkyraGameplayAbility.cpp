@@ -8,7 +8,7 @@
 //#include "Character/SkyraCharacter.h"
 #include "SkyraGameplayTags.h"
 #include "SkyraAbilityCost.h"
-#include "Character/SkyraHeroComponent.h"
+#include "Character/SkyraPawnControlComponent.h"
 #include "AbilitySystemBlueprintLibrary.h"
 #include "AbilitySystemGlobals.h"
 #include "SkyraAbilitySimpleFailureMessage.h"
@@ -94,9 +94,9 @@ AController* USkyraGameplayAbility::GetControllerFromActorInfo() const
 // 	return (CurrentActorInfo ? Cast<ASkyraCharacter>(CurrentActorInfo->AvatarActor.Get()) : nullptr);
 // }
 
-USkyraHeroComponent* USkyraGameplayAbility::GetHeroComponentFromActorInfo() const
+USkyraPawnControlComponent* USkyraGameplayAbility::GetHeroComponentFromActorInfo() const
 {
-	return (CurrentActorInfo ? USkyraHeroComponent::FindHeroComponent(CurrentActorInfo->AvatarActor.Get()) : nullptr);
+	return (CurrentActorInfo ? USkyraPawnControlComponent::FindPawnControlComponent(CurrentActorInfo->AvatarActor.Get()) : nullptr);
 }
 
 void USkyraGameplayAbility::NativeOnAbilityFailedToActivate(const FGameplayTagContainer& FailedReason) const
@@ -522,7 +522,7 @@ void USkyraGameplayAbility::SetCameraMode(TSubclassOf<USkyraCameraMode> CameraMo
 {
 	ENSURE_ABILITY_IS_INSTANTIATED_OR_RETURN(SetCameraMode, );
 
-	if (USkyraHeroComponent* HeroComponent = GetHeroComponentFromActorInfo())
+	if (USkyraPawnControlComponent* HeroComponent = GetHeroComponentFromActorInfo())
 	{
 		HeroComponent->SetAbilityCameraMode(CameraMode, CurrentSpecHandle);
 		ActiveCameraMode = CameraMode;
@@ -535,7 +535,7 @@ void USkyraGameplayAbility::ClearCameraMode()
 
 	if (ActiveCameraMode)
 	{
-		if (USkyraHeroComponent* HeroComponent = GetHeroComponentFromActorInfo())
+		if (USkyraPawnControlComponent* HeroComponent = GetHeroComponentFromActorInfo())
 		{
 			HeroComponent->ClearAbilityCameraMode(CurrentSpecHandle);
 		}

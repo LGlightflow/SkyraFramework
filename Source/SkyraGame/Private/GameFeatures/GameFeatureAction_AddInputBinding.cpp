@@ -8,7 +8,7 @@
 #include "GameFramework/Pawn.h"
 #include "EnhancedInputSubsystems.h"
 #include "Engine/LocalPlayer.h"
-#include "Character/SkyraHeroComponent.h"
+#include "Character/SkyraPawnControlComponent.h"
 #include "GameFeatures/GameFeatureAction_WorldActionBase.h"
 #include "Input/SkyraInputConfig.h"
 
@@ -113,7 +113,7 @@ void UGameFeatureAction_AddInputBinding::HandlePawnExtension(AActor* Actor, FNam
 	{
 		RemoveInputMapping(AsPawn, ActiveData);
 	}
-	else if ((EventName == UGameFrameworkComponentManager::NAME_ExtensionAdded) || (EventName == USkyraHeroComponent::NAME_BindInputsNow))
+	else if ((EventName == UGameFrameworkComponentManager::NAME_ExtensionAdded) || (EventName == USkyraPawnControlComponent::NAME_BindInputsNow))
 	{
 		AddInputMappingForPlayer(AsPawn, ActiveData);
 	}
@@ -127,7 +127,7 @@ void UGameFeatureAction_AddInputBinding::AddInputMappingForPlayer(APawn* Pawn, F
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* InputSystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
 		{
-			USkyraHeroComponent* HeroComponent = Pawn->FindComponentByClass<USkyraHeroComponent>();
+			USkyraPawnControlComponent* HeroComponent = Pawn->FindComponentByClass<USkyraPawnControlComponent>();
 			if (HeroComponent && HeroComponent->IsReadyToBindInputs())
 			{
 				for (const TSoftObjectPtr<const USkyraInputConfig>& Entry : InputConfigs)
@@ -155,7 +155,7 @@ void UGameFeatureAction_AddInputBinding::RemoveInputMapping(APawn* Pawn, FPerCon
 	{
 		if (UEnhancedInputLocalPlayerSubsystem* InputSystem = LocalPlayer->GetSubsystem<UEnhancedInputLocalPlayerSubsystem>())
 		{
-			if (USkyraHeroComponent* HeroComponent = Pawn->FindComponentByClass<USkyraHeroComponent>())
+			if (USkyraPawnControlComponent* HeroComponent = Pawn->FindComponentByClass<USkyraPawnControlComponent>())
 			{
 				for (const TSoftObjectPtr<const USkyraInputConfig>& Entry : InputConfigs)
 				{

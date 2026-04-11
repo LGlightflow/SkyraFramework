@@ -101,6 +101,7 @@ void ASkyraGameMode::HandleMatchAssignmentIfNotExpectingOne()
 
 	UWorld* World = GetWorld();
 
+	
 	if (!ExperienceId.IsValid() && UGameplayStatics::HasOption(OptionsString, TEXT("Experience")))
 	{
 		const FString ExperienceFromOptions = UGameplayStatics::ParseOption(OptionsString, TEXT("Experience"));
@@ -294,6 +295,7 @@ void ASkyraGameMode::OnMatchAssignmentGiven(FPrimaryAssetId ExperienceId, const 
 
 		USkyraExperienceManagerComponent* ExperienceComponent = GameState->FindComponentByClass<USkyraExperienceManagerComponent>();
 		check(ExperienceComponent);
+		//触发Experience异步加载
 		ExperienceComponent->SetCurrentExperience(ExperienceId);
 	}
 	else
@@ -456,6 +458,7 @@ void ASkyraGameMode::InitGameState()
 	// Listen for the experience load to complete	
 	USkyraExperienceManagerComponent* ExperienceComponent = GameState->FindComponentByClass<USkyraExperienceManagerComponent>();
 	check(ExperienceComponent);
+	// 注册对OnExperienceLoaded的回调
 	ExperienceComponent->CallOrRegister_OnExperienceLoaded(FOnSkyraExperienceLoaded::FDelegate::CreateUObject(this, &ThisClass::OnExperienceLoaded));
 }
 

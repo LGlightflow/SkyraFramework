@@ -72,7 +72,8 @@ public:
 protected:	
 	void OnExperienceLoaded(const USkyraExperienceDefinition* CurrentExperience);
 	bool IsExperienceLoaded() const;
-
+	
+	
 	void OnMatchAssignmentGiven(FPrimaryAssetId ExperienceId, const FString& ExperienceIdSource);
 
 	void HandleMatchAssignmentIfNotExpectingOne();

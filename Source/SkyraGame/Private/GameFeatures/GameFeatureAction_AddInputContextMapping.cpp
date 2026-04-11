@@ -9,7 +9,7 @@
 #include "EnhancedInputSubsystems.h"
 #include "GameFeatures/GameFeatureAction_WorldActionBase.h"
 #include "InputMappingContext.h"
-#include "Character/SkyraHeroComponent.h"
+#include "Character/SkyraPawnControlComponent.h"
 #include "UserSettings/EnhancedInputUserSettings.h"
 #include "System/SkyraAssetManager.h"
 
@@ -237,7 +237,7 @@ void UGameFeatureAction_AddInputContextMapping::HandleControllerExtension(AActor
 	{
 		RemoveInputMapping(AsController, ActiveData);
 	}
-	else if ((EventName == UGameFrameworkComponentManager::NAME_ExtensionAdded) || (EventName == USkyraHeroComponent::NAME_BindInputsNow))
+	else if ((EventName == UGameFrameworkComponentManager::NAME_ExtensionAdded) || (EventName == USkyraPawnControlComponent::NAME_BindInputsNow))
 	{
 		AddInputMappingForPlayer(AsController->GetLocalPlayer(), ActiveData);
 	}

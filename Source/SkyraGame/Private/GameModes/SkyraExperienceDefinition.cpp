@@ -7,6 +7,8 @@
 #include "Misc/DataValidation.h"
 #endif
 
+#include "GameFeatureAction_Empty.h"
+
 #include UE_INLINE_GENERATED_CPP_BY_NAME(SkyraExperienceDefinition)
 
 #define LOCTEXT_NAMESPACE "SkyraSystem"

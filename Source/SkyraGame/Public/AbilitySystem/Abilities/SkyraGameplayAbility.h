@@ -21,7 +21,7 @@ class UAnimMontage;
 class USkyraAbilityCost;
 class USkyraAbilitySystemComponent;
 class USkyraCameraMode;
-class USkyraHeroComponent;
+class USkyraPawnControlComponent;
 class UObject;
 struct FFrame;
 struct FGameplayAbilityActorInfo;
@@ -123,7 +123,7 @@ public:
 	// ASkyraCharacter* GetSkyraCharacterFromActorInfo() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Skyra|Ability")
-	USkyraHeroComponent* GetHeroComponentFromActorInfo() const;
+	USkyraPawnControlComponent* GetHeroComponentFromActorInfo() const;
 
 	ESkyraAbilityActivationPolicy GetActivationPolicy() const { return ActivationPolicy; }
 	ESkyraAbilityActivationGroup GetActivationGroup() const { return ActivationGroup; }

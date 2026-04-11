@@ -9,10 +9,12 @@
 
 void UGameFeatureAction_WorldActionBase::OnGameFeatureActivating(FGameFeatureActivatingContext& Context)
 {
+	// 注册 GameInstance 启动回调，等 GameInstance 准备好，再执行逻辑
 	GameInstanceStartHandles.FindOrAdd(Context) = FWorldDelegates::OnStartGameInstance.AddUObject(this, 
 		&UGameFeatureAction_WorldActionBase::HandleGameInstanceStart, FGameFeatureStateChangeContext(Context));
 
 	// Add to any worlds with associated game instances that have already been initialized
+	// 将所有WorldContext 进行add to world
 	for (const FWorldContext& WorldContext : GEngine->GetWorldContexts())
 	{
 		if (Context.ShouldApplyToWorldContext(WorldContext))

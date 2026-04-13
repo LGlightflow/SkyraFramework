@@ -134,6 +134,10 @@
     {
       "Name": "Mutable",
       "Enabled": true
-    }
+    },
+    {
+      "Name": "AnimationLocomotionLibrary",
+      "Enabled": true
+    } 
   ]
 }

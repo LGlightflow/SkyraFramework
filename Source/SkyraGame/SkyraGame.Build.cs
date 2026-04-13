@@ -172,7 +172,8 @@ public class SkyraGame : ModuleRules
 				"ClientPilot",
 				"AudioModulation",
 				"EngineSettings",
-				"DTLSHandlerComponent",
+				"DTLSHandlerComponent", 
+				"AnimGraphRuntime",
 			}
 		);
 

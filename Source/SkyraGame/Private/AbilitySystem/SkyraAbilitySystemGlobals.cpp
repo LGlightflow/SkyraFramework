@@ -11,18 +11,19 @@ struct FGameplayEffectContext;
 USkyraAbilitySystemGlobals::USkyraAbilitySystemGlobals(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
 {
-	AbilitySystemGlobalsClassName = FSoftClassPath(("/Script/SkyraGame.SkyraAbilitySystemGlobals"));
-	GlobalGameplayCueManagerClass = FSoftClassPath(("/Script/SkyraGame.SkyraGameplayCueManager"));
-	PredictTargetGameplayEffects = false;
-	bUseDebugTargetFromHud = true;
-	ActivateFailIsDeadName = TEXT("Ability.ActivateFail.IsDead");
-	ActivateFailCooldownName = TEXT("Ability.ActivateFail.Cooldown");
-	ActivateFailCostName = TEXT("Ability.ActivateFail.Cost");
-	ActivateFailTagsBlockedName = TEXT("Ability.ActivateFail.TagsBlocked");
-	ActivateFailTagsMissingName = TEXT("Ability.ActivateFail.TagsMissing");
-	ActivateFailNetworkingName = TEXT("Ability.ActivateFail.Networking");
-	GameplayCueNotifyPaths.Add("/SkyraFramework/GameplayCueNotifies");
-	GameplayCueNotifyPaths.Add("/SkyraFramework/GameplayCues");
+	// 不生效，必须要在DefaultGame.ini里设置
+	// AbilitySystemGlobalsClassName = FSoftClassPath(("/Script/SkyraGame.SkyraAbilitySystemGlobals"));
+	// GlobalGameplayCueManagerClass = FSoftClassPath(("/Script/SkyraGame.SkyraGameplayCueManager"));
+	// PredictTargetGameplayEffects = false;
+	// bUseDebugTargetFromHud = true;
+	// ActivateFailIsDeadName = TEXT("Ability.ActivateFail.IsDead");
+	// ActivateFailCooldownName = TEXT("Ability.ActivateFail.Cooldown");
+	// ActivateFailCostName = TEXT("Ability.ActivateFail.Cost");
+	// ActivateFailTagsBlockedName = TEXT("Ability.ActivateFail.TagsBlocked");
+	// ActivateFailTagsMissingName = TEXT("Ability.ActivateFail.TagsMissing");
+	// ActivateFailNetworkingName = TEXT("Ability.ActivateFail.Networking");
+	// GameplayCueNotifyPaths.Add("/SkyraFramework/GameplayCueNotifies");
+	// GameplayCueNotifyPaths.Add("/SkyraFramework/GameplayCues");
 }	
 
 FGameplayEffectContext* USkyraAbilitySystemGlobals::AllocGameplayEffectContext() const

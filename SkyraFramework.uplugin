@@ -138,6 +138,10 @@
     {
       "Name": "AnimationLocomotionLibrary",
       "Enabled": true
-    } 
+    } ,
+    {
+      "Name": "AnimationWarping",
+      "Enabled": true
+    }
   ]
 }

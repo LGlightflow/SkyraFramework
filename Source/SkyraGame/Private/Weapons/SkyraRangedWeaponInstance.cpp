@@ -10,11 +10,14 @@
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(SkyraRangedWeaponInstance)
 
+// 定义静态游戏标签，用于标识稳定瞄准摄像机
 UE_DEFINE_GAMEPLAY_TAG_STATIC(TAG_Skyra_Weapon_SteadyAimingCamera, "Skyra.Weapon.SteadyAimingCamera");
 
+// 构造函数，初始化热量和冷却曲线的默认值
 USkyraRangedWeaponInstance::USkyraRangedWeaponInstance(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-{
+{	
+	// 初始化热量与每次射击的曲线
 	HeatToHeatPerShotCurve.EditorCurveData.AddKey(0.0f, 1.0f);
 	HeatToCoolDownPerSecondCurve.EditorCurveData.AddKey(0.0f, 2.0f);
 }

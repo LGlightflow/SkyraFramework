@@ -84,6 +84,7 @@ public:
 	EDeadzoneStick DeadzoneStick = EDeadzoneStick::MoveStick;
 
 protected:
+	//处理手柄死区（Dead Zone），避免轻微抖动输入。
 	virtual FInputActionValue ModifyRaw_Implementation(const UEnhancedPlayerInput* PlayerInput, FInputActionValue CurrentValue, float DeltaTime) override;
 
 	// Visualize as black when unmodified. Red when blocked (with differing intensities to indicate axes)

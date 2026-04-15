@@ -40,7 +40,7 @@ namespace Skyra
 
 ASkyraPlayerController::ASkyraPlayerController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
-{
+{	
 	PlayerCameraManagerClass = ASkyraPlayerCameraManager::StaticClass();
 
 #if USING_CHEAT_MANAGER

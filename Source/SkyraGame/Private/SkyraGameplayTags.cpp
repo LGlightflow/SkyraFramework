@@ -72,6 +72,23 @@ namespace SkyraGameplayTags
 		// Fill these in with your custom modes
 	};
 
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_DamageTrait_Instant , "GameplayEffect.DamageTrait.Instant","");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_DamageTrait_Periodic,"GameplayEffect.DamageTrait.Periodic","");
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_DamageType_Basic,"GameplayEffect.DamageType.Basic","");
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_Heal_Instant,"GameplayEffect.Heal.Instant","");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_Heal_Periodic,"GameplayEffect.Heal.Periodic","");
+	
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Pawn_DamageTaken,"GameplayCue.Pawn.DamageTaken","");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Pawn_Death,"GameplayCue.Pawn.Death","");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Pawn_Heal,"GameplayCue.Pawn.Heal","");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Pawn_Spawn,"GameplayCue.Pawn.Spawn","");
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Cosmetic_AnimationStyle,"Cosmetic.AnimationStyle","");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Cosmetic_BodyStyle,"Cosmetic.BodyStyle","");
+	
 	FGameplayTag FindTagByString(const FString& TagString, bool bMatchPartialString)
 	{
 		const UGameplayTagsManager& Manager = UGameplayTagsManager::Get();

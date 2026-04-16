@@ -54,7 +54,7 @@ namespace SkyraGameplayTags
 
 	// When extending Skyra, you can create your own movement modes but you need to update GetCustomMovementModeTagMap()
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Movement_Mode_Custom, "Movement.Mode.Custom", "This is invalid and should be replaced with custom tags.  See SkyraGameplayTags::CustomMovementModeTagMap.");
-
+	
 	// Unreal Movement Modes
 	const TMap<uint8, FGameplayTag> MovementModeTagMap =
 	{
@@ -71,7 +71,12 @@ namespace SkyraGameplayTags
 	{
 		// Fill these in with your custom modes
 	};
-
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Cosmetic_AnimationStyle,"Cosmetic.AnimationStyle","");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Cosmetic_BodyStyle,"Cosmetic.BodyStyle","");
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(PawnType_Player,"Pawn.Player","");
+	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_DamageTrait_Instant , "GameplayEffect.DamageTrait.Instant","");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_DamageTrait_Periodic,"GameplayEffect.DamageTrait.Periodic","");
 	
@@ -86,8 +91,34 @@ namespace SkyraGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Pawn_Heal,"GameplayCue.Pawn.Heal","");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Pawn_Spawn,"GameplayCue.Pawn.Spawn","");
 	
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Cosmetic_AnimationStyle,"Cosmetic.AnimationStyle","");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Cosmetic_BodyStyle,"Cosmetic.BodyStyle","");
+	
+	// 射击模块 Tags
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_ActivateFail_MagazineFull, "Ability.ActivateFail.MagazineFull", "Cannot reload, magazine is already full");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_ActivateFail_NoSpareAmmo, "Ability.ActivateFail.NoSpareAmmo", "Cannot reload, no spare ammo available");
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Weapon_NoFiring, "Ability.Weapon.NoFiring", "Prevent the weapon from firing");
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Type_Action_Reload, "Ability.Type.Action.Reload", "Reload action ability");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Type_Action_WeaponFire, "Ability.Type.Action.WeaponFire", "Weapon fire action ability");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Type_Passive_AutoReload, "Ability.Type.Passive.AutoReload", "Auto reload passive ability");
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Event_Movement_Reload, "Event.Movement.Reload", "Animation event for reload movement");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Event_Movement_WeaponFire, "Event.Movement.WeaponFire", "Animation event for weapon fire movement");
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Weapon_Reload, "InputTag.Weapon.Reload", "Input tag for weapon reload action");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Weapon_Fire, "InputTag.Weapon.Fire", "Single weapon fire input.");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Weapon_FireAuto, "InputTag.Weapon.FireAuto", "Automatic weapon fire input.");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Weapon_ADS, "InputTag.Weapon.ADS", "Aim Down Sights input.");
+	
+	// 武器 GameplayCue
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Weapon_Example_Impact, "GameplayCue.Weapon.Example.Impact", "Impact effects for example weapon");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Weapon_Example_Fire, "GameplayCue.Weapon.Example.Fire", "Fire effects for example weapon");
+	
+	// 武器弹药属性
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Shooter_Weapon_MagazineAmmo, "Shooter.Weapon.MagazineAmmo", "Current ammo in the magazine");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Shooter_Weapon_MagazineSize, "Shooter.Weapon.MagazineSize", "Max ammo capacity of the magazine");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Shooter_Weapon_SpareAmmo, "Shooter.Weapon.SpareAmmo", "Spare ammo available for reload");
+
 	
 	FGameplayTag FindTagByString(const FString& TagString, bool bMatchPartialString)
 	{

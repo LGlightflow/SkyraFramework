@@ -110,6 +110,9 @@ namespace SkyraGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Weapon_FireAuto, "InputTag.Weapon.FireAuto", "Automatic weapon fire input.");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Weapon_ADS, "InputTag.Weapon.ADS", "Aim Down Sights input.");
 	
+	//
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_DamageType_Example, "GameplayEffect.DamageType.Example", "");
+	
 	// 武器 GameplayCue
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Weapon_Example_Impact, "GameplayCue.Weapon.Example.Impact", "Impact effects for example weapon");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Weapon_Example_Fire, "GameplayCue.Weapon.Example.Fire", "Fire effects for example weapon");

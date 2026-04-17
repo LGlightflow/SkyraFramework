@@ -103,6 +103,8 @@ namespace SkyraGameplayTags
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Weapon_FireAuto);
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(InputTag_Weapon_ADS);
 	
+	//GameplayEffect.DamageType.Pistol
+	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayEffect_DamageType_Example);
 	// 这里按武器行为来定义，例如GameplayCue_Weapon_Example，example是武器，接下来的子标签定义了对应的GC
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_Weapon_Example_Impact);
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(GameplayCue_Weapon_Example_Fire);

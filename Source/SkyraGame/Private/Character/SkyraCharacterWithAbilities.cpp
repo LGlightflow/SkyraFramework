@@ -2,6 +2,7 @@
 
 #include "SkyraCharacterWithAbilities.h"
 
+#include "SkyraPawnExtensionComponent.h"
 #include "AbilitySystem/Attributes/SkyraCombatSet.h"
 #include "AbilitySystem/Attributes/SkyraHealthSet.h"
 #include "AbilitySystem/SkyraAbilitySystemComponent.h"
@@ -30,6 +31,11 @@ void ASkyraCharacterWithAbilities::PostInitializeComponents()
 
 	check(AbilitySystemComponent);
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	
+	if (PawnExtComponent)
+	{
+		PawnExtComponent->InitializeAbilitySystem(AbilitySystemComponent, this);
+	}
 }
 
 UAbilitySystemComponent* ASkyraCharacterWithAbilities::GetAbilitySystemComponent() const

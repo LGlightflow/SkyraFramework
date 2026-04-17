@@ -187,7 +187,7 @@ protected:
 
 	virtual bool CanJumpInternal_Implementation() const;
 
-private:
+protected:
 
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Skyra|Character", Meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<USkyraPawnExtensionComponent> PawnExtComponent;

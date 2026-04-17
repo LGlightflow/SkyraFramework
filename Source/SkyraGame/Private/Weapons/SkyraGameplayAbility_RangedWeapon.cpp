@@ -42,6 +42,7 @@ UE_DEFINE_GAMEPLAY_TAG_STATIC(TAG_WeaponFireBlocked, "Ability.Weapon.NoFiring");
 
 //////////////////////////////////////////////////////////////////////
 
+// 子弹散布算法
 FVector VRandConeNormalDistribution(const FVector& Dir, const float ConeHalfAngleRad, const float Exponent)
 {
 	if (ConeHalfAngleRad > 0.f)
@@ -349,6 +350,7 @@ FHitResult USkyraGameplayAbility_RangedWeapon::DoSingleBulletTrace(const FVector
 	return Impact;
 }
 
+//3。生成HitResult
 void USkyraGameplayAbility_RangedWeapon::PerformLocalTargeting(OUT TArray<FHitResult>& OutHits)
 {
 	APawn* const AvatarPawn = Cast<APawn>(GetAvatarActorFromActorInfo());
@@ -437,6 +439,7 @@ void USkyraGameplayAbility_RangedWeapon::TraceBulletsInCartridge(const FRangedWe
 	}
 }
 
+// 1.激活GA
 void USkyraGameplayAbility_RangedWeapon::ActivateAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, const FGameplayEventData* TriggerEventData)
 {
 	// Bind target data callback
@@ -474,6 +477,7 @@ void USkyraGameplayAbility_RangedWeapon::EndAbility(const FGameplayAbilitySpecHa
 	}
 }
 
+//4.发送、处理命中数据
 void USkyraGameplayAbility_RangedWeapon::OnTargetDataReadyCallback(const FGameplayAbilityTargetDataHandle& InData, FGameplayTag ApplicationTag)
 {
 	UAbilitySystemComponent* MyAbilityComponent = CurrentActorInfo->AbilitySystemComponent.Get();
@@ -527,7 +531,8 @@ void USkyraGameplayAbility_RangedWeapon::OnTargetDataReadyCallback(const FGamepl
 #endif //WITH_SERVER_CODE
 
 
-		// See if we still have ammo
+		// See if we still have ammo\
+		//5.扣子弹/消耗
 		if (bIsTargetDataValid && CommitAbility(CurrentSpecHandle, CurrentActorInfo, CurrentActivationInfo))
 		{
 			// We fired the weapon, add spread
@@ -536,6 +541,7 @@ void USkyraGameplayAbility_RangedWeapon::OnTargetDataReadyCallback(const FGamepl
 			WeaponData->AddSpread();
 
 			// Let the blueprint do stuff like apply effects to the targets
+			// 6. 蓝图中处理伤害
 			OnRangedWeaponTargetDataReady(LocalTargetDataHandle);
 		}
 		else
@@ -549,6 +555,7 @@ void USkyraGameplayAbility_RangedWeapon::OnTargetDataReadyCallback(const FGamepl
 	MyAbilityComponent->ConsumeClientReplicatedTargetData(CurrentSpecHandle, CurrentActivationInfo.GetActivationPredictionKey());
 }
 
+// 2.本地计算命中
 void USkyraGameplayAbility_RangedWeapon::StartRangedWeaponTargeting()
 {
 	check(CurrentActorInfo);
@@ -571,7 +578,7 @@ void USkyraGameplayAbility_RangedWeapon::StartRangedWeaponTargeting()
 	// Fill out the target data from the hit results
 	FGameplayAbilityTargetDataHandle TargetData;
 	TargetData.UniqueId = WeaponStateComponent ? WeaponStateComponent->GetUnconfirmedServerSideHitMarkerCount() : 0;
-
+	
 	if (FoundHits.Num() > 0)
 	{
 		const int32 CartridgeID = FMath::Rand();

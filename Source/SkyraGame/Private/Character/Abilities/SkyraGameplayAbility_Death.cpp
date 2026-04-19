@@ -1,6 +1,6 @@
 // Copyright Epic Games, Inc. All Rights Reserved.
 
-#include "SkyraGameplayAbility_Death.h"
+#include "Abilities/SkyraGameplayAbility_Death.h"
 
 #include "AbilitySystem/Abilities/SkyraGameplayAbility.h"
 #include "AbilitySystem/SkyraAbilitySystemComponent.h"

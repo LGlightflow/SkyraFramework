@@ -285,7 +285,17 @@ FTransform USkyraGameplayAbility_RangedWeapon::GetTargetingTransform(APawn* Sour
 		// Return a rotator pointing at the focal point from the source
 		return FTransform((FocalLoc - SourceLoc).Rotation(), SourceLoc);
 	}
-
+	
+	if (Source == ESkyraAbilityTargetingSource::PawnForward)
+	{
+		return FTransform(AimQuat, SourceLoc); //AimQuat = SourcePawn->GetActorQuat();
+	}
+	
+	if (Source == ESkyraAbilityTargetingSource::Custom)
+	{
+		return GetCustomTargetingTransform();
+	}
+	
 	// If we got here, either we don't have a camera or we don't want to use it, either way go forward
 	return FTransform(AimQuat, SourceLoc);
 }
@@ -363,7 +373,7 @@ void USkyraGameplayAbility_RangedWeapon::PerformLocalTargeting(OUT TArray<FHitRe
 		InputData.bCanPlayBulletFX = (AvatarPawn->GetNetMode() != NM_DedicatedServer);
 
 		//@TODO: Should do more complicated logic here when the player is close to a wall, etc...
-		const FTransform TargetTransform = GetTargetingTransform(AvatarPawn, ESkyraAbilityTargetingSource::CameraTowardsFocus);
+		const FTransform TargetTransform = GetTargetingTransform(AvatarPawn, TargetingSource);
 		InputData.AimDir = TargetTransform.GetUnitAxis(EAxis::X);
 		InputData.StartTrace = TargetTransform.GetTranslation();
 

@@ -117,7 +117,13 @@ protected:
 	// Called when target data is ready
 	UFUNCTION(BlueprintImplementableEvent)
 	void OnRangedWeaponTargetDataReady(const FGameplayAbilityTargetDataHandle& TargetData);
-
+	
+protected:
+	UPROPERTY(BlueprintReadOnly,EditAnywhere,Category="Skyra|Ability")
+	ESkyraAbilityTargetingSource TargetingSource = ESkyraAbilityTargetingSource::CameraTowardsFocus;
+	
+	UFUNCTION(BlueprintCallable,BlueprintImplementableEvent,Category="Skyra|Ability")
+	FTransform GetCustomTargetingTransform() const;
 private:
 	FDelegateHandle OnTargetDataReadyCallbackDelegateHandle;
 };

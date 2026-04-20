@@ -87,6 +87,9 @@ namespace SkyraGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_Heal_Periodic,"GameplayEffect.Heal.Periodic","");
 	
 	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Type_StatusChange_Death,"Ability.Type.StatusChange.Death", "");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Type_StatusChange_Spawning,"Ability.Type.StatusChange.Spawning", "");
+	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Pawn_DamageTaken,"GameplayCue.Pawn.DamageTaken","");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Pawn_Death,"GameplayCue.Pawn.Death","");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Pawn_Heal,"GameplayCue.Pawn.Heal","");

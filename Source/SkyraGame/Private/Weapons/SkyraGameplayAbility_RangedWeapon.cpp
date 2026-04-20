@@ -293,7 +293,8 @@ FTransform USkyraGameplayAbility_RangedWeapon::GetTargetingTransform(APawn* Sour
 	
 	if (Source == ESkyraAbilityTargetingSource::Custom)
 	{
-		return GetCustomTargetingTransform();
+		GetCustomTargetingTransform();
+		return CustomTargetTransform;
 	}
 	
 	// If we got here, either we don't have a camera or we don't want to use it, either way go forward

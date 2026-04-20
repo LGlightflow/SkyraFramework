@@ -22,6 +22,7 @@ namespace SkyraGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Look_Mouse, "InputTag.Look.Mouse", "Look (mouse) input.");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Look_Stick, "InputTag.Look.Stick", "Look (stick) input.");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Crouch, "InputTag.Crouch", "Crouch input.");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Jump, "InputTag.Jump", "Jump input.");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_AutoRun, "InputTag.AutoRun", "Auto-run input.");
 
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InitState_Spawned, "InitState.Spawned", "1: Actor/component has initially spawned and can be extended");
@@ -98,10 +99,15 @@ namespace SkyraGameplayTags
 	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Weapon_NoFiring, "Ability.Weapon.NoFiring", "Prevent the weapon from firing");
 	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Type_Action_Jump, "Ability.Type.Action.Jump", "");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Type_Action_Dash, "Ability.Type.Action.Dash", "");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Type_Action_Reload, "Ability.Type.Action.Reload", "Reload action ability");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Type_Action_WeaponFire, "Ability.Type.Action.WeaponFire", "Weapon fire action ability");
+	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_Type_Passive_AutoReload, "Ability.Type.Passive.AutoReload", "Auto reload passive ability");
 	
+	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Event_Movement_Dash, "Event.Movement.Dash", "");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Event_Movement_Reload, "Event.Movement.Reload", "Animation event for reload movement");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Event_Movement_WeaponFire, "Event.Movement.WeaponFire", "Animation event for weapon fire movement");
 	
@@ -109,7 +115,7 @@ namespace SkyraGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Weapon_Fire, "InputTag.Weapon.Fire", "Single weapon fire input.");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Weapon_FireAuto, "InputTag.Weapon.FireAuto", "Automatic weapon fire input.");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Weapon_ADS, "InputTag.Weapon.ADS", "Aim Down Sights input.");
-	
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(InputTag_Dash, "InputTag.Dash", "");
 	//
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_DamageType_Example, "GameplayEffect.DamageType.Example", "");
 	

@@ -92,11 +92,13 @@ struct FSkyraAbilitySet_GrantedHandles
 	GENERATED_BODY()
 
 public:
-
+	// 添加记录，方便删/查
+	
 	void AddAbilitySpecHandle(const FGameplayAbilitySpecHandle& Handle);
 	void AddGameplayEffectHandle(const FActiveGameplayEffectHandle& Handle);
 	void AddAttributeSet(UAttributeSet* Set);
 
+	// 回收
 	void TakeFromAbilitySystem(USkyraAbilitySystemComponent* SkyraASC);
 
 protected:
@@ -119,6 +121,7 @@ protected:
  * USkyraAbilitySet
  *
  *	Non-mutable data asset used to grant gameplay abilities and gameplay effects.
+ *	角色配置模板,给角色发Ability + GameplayEffect + AttributeSet的DataAsset
  */
 UCLASS(BlueprintType, Const)
 class USkyraAbilitySet : public UPrimaryDataAsset

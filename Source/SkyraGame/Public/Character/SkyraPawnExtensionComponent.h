@@ -52,6 +52,9 @@ public:
 	/** Sets the current pawn data */
 	void SetPawnData(const USkyraPawnData* InPawnData);
 
+	UFUNCTION(BlueprintCallable, Category = "Skyra|Pawn")
+	void K2_SetPawnData(const USkyraPawnData* InPawnData);
+	
 	/** Gets the current ability system component, which may be owned by a different actor */
 	UFUNCTION(BlueprintPure, Category = "Skyra|Pawn")
 	USkyraAbilitySystemComponent* GetSkyraAbilitySystemComponent() const { return AbilitySystemComponent; }

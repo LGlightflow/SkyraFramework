@@ -350,7 +350,7 @@ APawn* ASkyraGameMode::SpawnDefaultPawnAtTransform_Implementation(AController* N
 	SpawnInfo.Instigator = GetInstigator();
 	SpawnInfo.ObjectFlags |= RF_Transient;	// Never save the default player pawns into a map.
 	SpawnInfo.bDeferConstruction = true;
-
+	// TODO: PawnClass 要支持前端选择角色，注意下可能要结合PawnData ,emm 考虑在GetDefaultPawnClassForController_Implementation 实现仅更换模型
 	if (UClass* PawnClass = GetDefaultPawnClassForController(NewPlayer))
 	{
 		if (APawn* SpawnedPawn = GetWorld()->SpawnActor<APawn>(PawnClass, SpawnTransform, SpawnInfo))

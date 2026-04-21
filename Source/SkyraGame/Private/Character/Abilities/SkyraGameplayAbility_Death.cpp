@@ -25,7 +25,7 @@ USkyraGameplayAbility_Death::USkyraGameplayAbility_Death(const FObjectInitialize
 		FAbilityTriggerData TriggerData;
 		TriggerData.TriggerTag = SkyraGameplayTags::GameplayEvent_Death;
 		TriggerData.TriggerSource = EGameplayAbilityTriggerSource::GameplayEvent;
-		AbilityTriggers.Add(TriggerData);
+		AbilityTriggers.Add(TriggerData); //添加入AbilityTriggers,使当生命值小于0时，通过tag触发死亡(USkyraHealthComponent::HandleOutOfHealth)
 	}
 }
 
@@ -39,15 +39,19 @@ void USkyraGameplayAbility_Death::ActivateAbility(const FGameplayAbilitySpecHand
 	AbilityTypesToIgnore.AddTag(SkyraGameplayTags::Ability_Behavior_SurvivesDeath);
 
 	// Cancel all abilities and block others from starting.
+	// 取消所有ability
 	SkyraASC->CancelAbilities(nullptr, &AbilityTypesToIgnore, this);
-
+	
+	// 死亡不能被打断
 	SetCanBeCanceled(false);
 
+	//切换激活组，当前死亡Ability独占状态，其他不能启动
 	if (!ChangeActivationGroup(ESkyraAbilityActivationGroup::Exclusive_Blocking))
 	{
 		UE_LOG(LogSkyraAbilitySystem, Error, TEXT("USkyraGameplayAbility_Death::ActivateAbility: Ability [%s] failed to change activation group to blocking."), *GetName());
 	}
-
+	
+	//如果设置了自动开始死亡则开始，否则应该转到蓝图处理
 	if (bAutoStartDeath)
 	{
 		StartDeath();

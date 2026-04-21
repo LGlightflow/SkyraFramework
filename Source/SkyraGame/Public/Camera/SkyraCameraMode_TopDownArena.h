@@ -10,7 +10,7 @@
 /**
  * 
  */
-UCLASS( Blueprintable)
+UCLASS(Abstract,Blueprintable)
 class SKYRAGAME_API USkyraCameraMode_TopDownArena : public USkyraCameraMode
 {
 	GENERATED_BODY()

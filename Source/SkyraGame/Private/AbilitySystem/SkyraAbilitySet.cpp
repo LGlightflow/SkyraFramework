@@ -73,7 +73,8 @@ USkyraAbilitySet::USkyraAbilitySet(const FObjectInitializer& ObjectInitializer)
 void USkyraAbilitySet::GiveToAbilitySystem(USkyraAbilitySystemComponent* SkyraASC, FSkyraAbilitySet_GrantedHandles* OutGrantedHandles, UObject* SourceObject) const
 {
 	check(SkyraASC);
-
+	
+	// 所有 Ability / GE / Attribute 等只能服务器发
 	if (!SkyraASC->IsOwnerActorAuthoritative())
 	{
 		// Must be authoritative to give or take ability sets.
@@ -92,11 +93,13 @@ void USkyraAbilitySet::GiveToAbilitySystem(USkyraAbilitySystemComponent* SkyraAS
 		}
 
 		USkyraGameplayAbility* AbilityCDO = AbilityToGrant.Ability->GetDefaultObject<USkyraGameplayAbility>();
-
+		
+		// 发ability
 		FGameplayAbilitySpec AbilitySpec(AbilityCDO, AbilityToGrant.AbilityLevel);
-		AbilitySpec.SourceObject = SourceObject;
-		AbilitySpec.DynamicAbilityTags.AddTag(AbilityToGrant.InputTag);
-
+		AbilitySpec.SourceObject = SourceObject; //Ability来源，例如武器、Buff之类
+		AbilitySpec.DynamicAbilityTags.AddTag(AbilityToGrant.InputTag); //输入Tag
+		
+		//将Ability注册到ASC
 		const FGameplayAbilitySpecHandle AbilitySpecHandle = SkyraASC->GiveAbility(AbilitySpec);
 
 		if (OutGrantedHandles)
@@ -104,8 +107,9 @@ void USkyraAbilitySet::GiveToAbilitySystem(USkyraAbilitySystemComponent* SkyraAS
 			OutGrantedHandles->AddAbilitySpecHandle(AbilitySpecHandle);
 		}
 	}
-
+	
 	// Grant the gameplay effects.
+	// 发GameplayEffect
 	for (int32 EffectIndex = 0; EffectIndex < GrantedGameplayEffects.Num(); ++EffectIndex)
 	{
 		const FSkyraAbilitySet_GameplayEffect& EffectToGrant = GrantedGameplayEffects[EffectIndex];
@@ -126,6 +130,7 @@ void USkyraAbilitySet::GiveToAbilitySystem(USkyraAbilitySystemComponent* SkyraAS
 	}
 
 	// Grant the attribute sets.
+	// 发AttributeSet
 	for (int32 SetIndex = 0; SetIndex < GrantedAttributes.Num(); ++SetIndex)
 	{
 		const FSkyraAbilitySet_AttributeSet& SetToGrant = GrantedAttributes[SetIndex];
@@ -135,7 +140,8 @@ void USkyraAbilitySet::GiveToAbilitySystem(USkyraAbilitySystemComponent* SkyraAS
 			UE_LOG(LogSkyraAbilitySystem, Error, TEXT("GrantedAttributes[%d] on ability set [%s] is not valid"), SetIndex, *GetNameSafe(this));
 			continue;
 		}
-
+		
+		// AttributeSet 运行时创建
 		UAttributeSet* NewSet = NewObject<UAttributeSet>(SkyraASC->GetOwner(), SetToGrant.AttributeSet);
 		SkyraASC->AddAttributeSetSubobject(NewSet);
 

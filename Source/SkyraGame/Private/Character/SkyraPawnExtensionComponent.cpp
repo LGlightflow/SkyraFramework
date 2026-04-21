@@ -10,6 +10,7 @@
 #include "SkyraGameplayTags.h"
 #include "SkyraLogChannels.h"
 #include "SkyraPawnData.h"
+#include "GeometryCollection/GeometryCollectionParticlesData.h"
 #include "Net/UnrealNetwork.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(SkyraPawnExtensionComponent)
@@ -95,6 +96,11 @@ void USkyraPawnExtensionComponent::SetPawnData(const USkyraPawnData* InPawnData)
 	Pawn->ForceNetUpdate();
 
 	CheckDefaultInitialization();
+}
+
+void USkyraPawnExtensionComponent::K2_SetPawnData(const USkyraPawnData* InPawnData)
+{
+	SetPawnData(InPawnData);
 }
 
 void USkyraPawnExtensionComponent::OnRep_PawnData()
@@ -214,7 +220,8 @@ void USkyraPawnExtensionComponent::CheckDefaultInitialization()
 {
 	// Before checking our progress, try progressing any other features we might depend on
 	CheckDefaultInitializationForImplementers();
-
+	
+	// 初始化状态链，根据这些标签找引用去进行对应模块的处理
 	static const TArray<FGameplayTag> StateChain = { SkyraGameplayTags::InitState_Spawned, SkyraGameplayTags::InitState_DataAvailable, SkyraGameplayTags::InitState_DataInitialized, SkyraGameplayTags::InitState_GameplayReady };
 
 	// This will try to progress from spawned (which is only set in BeginPlay) through the data initialization stages until it gets to gameplay ready

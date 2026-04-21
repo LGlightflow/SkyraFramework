@@ -10,20 +10,25 @@
 class UObject;
 
 /** Struct that defines the relationship between different ability tags */
+//
+//给角色发：Ability + GameplayEffect + AttributeSet
 USTRUCT()
 struct FSkyraAbilityTagRelationship
 {
 	GENERATED_BODY()
 
 	/** The tag that this container relationship is about. Single tag, but abilities can have multiple of these */
+	// GA的触发标签，命名规则为Gameplay.Action的子标签，这里只能填一个标签，但是一个Ability可以填多个（即通过这里的Tag可以同时触发多个Ability）
 	UPROPERTY(EditAnywhere, Category = Ability, meta = (Categories = "Gameplay.Action"))
 	FGameplayTag AbilityTag;
 
 	/** The other ability tags that will be blocked by any ability using this tag */
+	// 当AbilityTag对应的Ability存在时，拥有AbilityTagsToBlock的Ability不能启动
 	UPROPERTY(EditAnywhere, Category = Ability)
 	FGameplayTagContainer AbilityTagsToBlock;
 
 	/** The other ability tags that will be canceled by any ability using this tag */
+	// 当AbilityTag对应的Ability存在时，拥有AbilityTagsToBlock的Ability立即取消
 	UPROPERTY(EditAnywhere, Category = Ability)
 	FGameplayTagContainer AbilityTagsToCancel;
 
@@ -38,6 +43,7 @@ struct FSkyraAbilityTagRelationship
 
 
 /** Mapping of how ability tags block or cancel other abilities */
+// Ability 行为约束 （谁能打断谁 / 谁不能同时存在 / 谁需要前置条件），用此DA的好处是可以在此资产维护Abilities之间的关系而不是在GA里面填写（当然本身GA的tag配置功能也没废弃）
 UCLASS()
 class USkyraAbilityTagRelationshipMapping : public UDataAsset
 {

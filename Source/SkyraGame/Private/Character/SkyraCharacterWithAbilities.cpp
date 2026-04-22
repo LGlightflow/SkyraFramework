@@ -7,6 +7,7 @@
 #include "AbilitySystem/Attributes/SkyraHealthSet.h"
 #include "AbilitySystem/SkyraAbilitySystemComponent.h"
 #include "Async/TaskGraphInterfaces.h"
+#include "Character/SkyraPawnData.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(SkyraCharacterWithAbilities)
 
@@ -31,11 +32,6 @@ void ASkyraCharacterWithAbilities::PostInitializeComponents()
 
 	check(AbilitySystemComponent);
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
-	
-	if (PawnExtComponent)
-	{
-		PawnExtComponent->InitializeAbilitySystem(AbilitySystemComponent, this);
-	}
 }
 
 UAbilitySystemComponent* ASkyraCharacterWithAbilities::GetAbilitySystemComponent() const
@@ -43,3 +39,17 @@ UAbilitySystemComponent* ASkyraCharacterWithAbilities::GetAbilitySystemComponent
 	return AbilitySystemComponent;
 }
 
+void ASkyraCharacterWithAbilities::BeginPlay()
+{
+	Super::BeginPlay();
+	if (PawnExtComponent)
+	{
+		PawnExtComponent->InitializeAbilitySystem(AbilitySystemComponent, this);
+		
+		if (CustomDefaultPawnData)
+		{
+			PawnExtComponent->K2_ForceUpdatePawnData(CustomDefaultPawnData);
+		}
+		
+	}
+}

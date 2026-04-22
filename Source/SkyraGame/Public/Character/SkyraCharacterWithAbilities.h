@@ -6,6 +6,7 @@
 
 #include "SkyraCharacterWithAbilities.generated.h"
 
+class USkyraPawnData;
 class UAbilitySystemComponent;
 class USkyraAbilitySystemComponent;
 class UObject;
@@ -23,12 +24,16 @@ public:
 	virtual void PostInitializeComponents() override;
 
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
-
+	
+	virtual void BeginPlay() override;
 private:
 
 	// The ability system component sub-object used by player characters.
 	UPROPERTY(VisibleAnywhere, Category = "Skyra|PlayerState")
 	TObjectPtr<USkyraAbilitySystemComponent> AbilitySystemComponent;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Skyra|PlayerState")
+	TObjectPtr<const USkyraPawnData> CustomDefaultPawnData;
 	
 	// Health attribute set used by this actor.
 	UPROPERTY()
@@ -36,4 +41,6 @@ private:
 	// Combat attribute set used by this actor.
 	UPROPERTY()
 	TObjectPtr<const class USkyraCombatSet> CombatSet;
+	
+
 };

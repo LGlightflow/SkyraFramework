@@ -142,7 +142,7 @@ protected:
 	void OnRep_PawnData();
 
 protected:
-
+	// 这里的PawnData 是 “根” PawnData, PawnExtComp的PawnData是取这里的引用
 	UPROPERTY(ReplicatedUsing = OnRep_PawnData)
 	TObjectPtr<const USkyraPawnData> PawnData;
 

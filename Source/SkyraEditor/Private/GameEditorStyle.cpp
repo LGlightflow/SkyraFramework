@@ -3,6 +3,7 @@
 #include "GameEditorStyle.h"
 
 #include "Brushes/SlateImageBrush.h"
+#include "Interfaces/IPluginManager.h"
 #include "Misc/Paths.h"
 #include "Styling/SlateStyle.h"
 #include "Styling/SlateStyleRegistry.h"
@@ -31,17 +32,17 @@ FName FGameEditorStyle::GetStyleSetName()
 	return StyleSetName;
 }
 
-#define IMAGE_BRUSH( RelativePath, ... ) FSlateImageBrush( FPaths::EngineContentDir() / "Editor/Slate"/ RelativePath + TEXT(".png"), __VA_ARGS__ )
+/*#define IMAGE_BRUSH( RelativePath, ... ) FSlateImageBrush( FPaths::EngineContentDir() / "Editor/Slate"/ RelativePath + TEXT(".png"), __VA_ARGS__ )
 #define BOX_BRUSH( RelativePath, ... ) FSlateBoxBrush( FPaths::EngineContentDir() / "Editor/Slate"/ RelativePath + TEXT(".png"), __VA_ARGS__ )
 #define BORDER_BRUSH( RelativePath, ... ) FSlateBorderBrush( FPaths::EngineContentDir() / "Editor/Slate"/ RelativePath + TEXT(".png"), __VA_ARGS__ )
 
 #define GAME_IMAGE_BRUSH( RelativePath, ... ) FSlateImageBrush( FPaths::ProjectContentDir() / "Editor/Slate"/ RelativePath + TEXT(".png"), __VA_ARGS__ )
-#define GAME_IMAGE_BRUSH_SVG( RelativePath, ... ) FSlateVectorImageBrush( FPaths::ProjectContentDir() / "Editor/Slate"/ RelativePath + TEXT(".svg"), __VA_ARGS__ )
+#define GAME_IMAGE_BRUSH_SVG( RelativePath, ... ) FSlateVectorImageBrush( FPaths::ProjectContentDir() / "Editor/Slate"/ RelativePath + TEXT(".svg"), __VA_ARGS__ )*/
 
 TSharedRef< FSlateStyleSet > FGameEditorStyle::Create()
 {
 	TSharedRef<FSlateStyleSet> StyleRef = MakeShareable(new FSlateStyleSet(FGameEditorStyle::GetStyleSetName()));
-	StyleRef->SetContentRoot(FPaths::EngineContentDir() / TEXT("Editor/Slate"));
+	StyleRef->SetContentRoot(IPluginManager::Get().FindPlugin(TEXT("SkyraFramework"))->GetBaseDir() / TEXT("Resources"));
 	StyleRef->SetCoreContentRoot(FPaths::EngineContentDir() / TEXT("Slate"));
 
 	FSlateStyleSet& Style = StyleRef.Get();
@@ -53,7 +54,12 @@ TSharedRef< FSlateStyleSet > FGameEditorStyle::Create()
 
 	// Toolbar 
 	{
-		Style.Set("GameEditor.CheckContent", new GAME_IMAGE_BRUSH_SVG("Icons/CheckContent", Icon20x20));
+		Style.Set("GameEditor.CheckContent",
+			new FSlateVectorImageBrush(
+			Style.RootToContentDir(TEXT("CheckContent"), TEXT(".svg")),
+			Icon20x20
+		)
+);
 	}
 
 	return StyleRef;

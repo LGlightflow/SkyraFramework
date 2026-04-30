@@ -31,7 +31,7 @@ public:
 	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
 	//~End of AActor interface
 protected:
-	virtual void SetPawnData(const USkyraPawnData* InPawnData);
+	virtual void GivePawnDataToAbilitySystem(const USkyraPawnData* InPawnData);
 
 private:
 

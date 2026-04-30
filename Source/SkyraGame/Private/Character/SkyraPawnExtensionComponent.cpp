@@ -99,37 +99,6 @@ void USkyraPawnExtensionComponent::SetPawnData(const USkyraPawnData* InPawnData)
 	CheckDefaultInitialization();
 }
 
-// TODO: 可能移到Character类好点
-void USkyraPawnExtensionComponent::K2_ForceUpdatePawnData(const USkyraPawnData* InPawnData)
-{
-	check(InPawnData);
-
-	APawn* Pawn = GetPawnChecked<APawn>();
-	
-	if (Pawn->GetLocalRole() != ROLE_Authority)
-	{
-		return;
-	}
-
-	if (PawnData)
-	{
-		UE_LOG(LogSkyra, Warning, TEXT("Trying to set PawnData [%s] on pawn [%s] that already has valid PawnData [%s]."), *GetNameSafe(InPawnData), *GetNameSafe(Pawn), *GetNameSafe(PawnData));
-	}
-	MARK_PROPERTY_DIRTY_FROM_NAME(ThisClass, PawnData, this);
-	PawnData = InPawnData;
-	
-	for (const USkyraAbilitySet* AbilitySet : PawnData->AbilitySets)
-	{
-		if (AbilitySet)
-		{
-			AbilitySet->GiveToAbilitySystem(AbilitySystemComponent, nullptr);
-		}
-	}
-
-	Pawn->ForceNetUpdate();
-
-	CheckDefaultInitialization();
-}
 
 void USkyraPawnExtensionComponent::OnRep_PawnData()
 {

@@ -3,6 +3,7 @@
 #include "SkyraCharacterWithAbilities.h"
 
 #include "SkyraAbilitySet.h"
+#include "SkyraHealthComponent.h"
 #include "SkyraLogChannels.h"
 #include "SkyraPawnExtensionComponent.h"
 #include "AbilitySystem/Attributes/SkyraCombatSet.h"
@@ -38,6 +39,19 @@ void ASkyraCharacterWithAbilities::PostInitializeComponents()
 
 	check(AbilitySystemComponent);
 	AbilitySystemComponent->InitAbilityActorInfo(this, this);
+	
+	if (HealthComponent)
+	{	
+		if (!HealthComponent->OnDeathStarted.IsAlreadyBound(this, &ThisClass::OnDeathStarted))
+		{
+			HealthComponent->OnDeathStarted.AddDynamic(this, &ThisClass::OnDeathStarted);
+		}
+		if (!HealthComponent->OnDeathFinished.IsAlreadyBound(this, &ThisClass::OnDeathFinished))
+		{
+			HealthComponent->OnDeathFinished.AddDynamic(this, &ThisClass::OnDeathFinished);
+		}
+		
+	}
 }
 
 UAbilitySystemComponent* ASkyraCharacterWithAbilities::GetAbilitySystemComponent() const
@@ -48,27 +62,26 @@ UAbilitySystemComponent* ASkyraCharacterWithAbilities::GetAbilitySystemComponent
 void ASkyraCharacterWithAbilities::BeginPlay()
 {
 	Super::BeginPlay();
-
-		
-	if (CustomDefaultPawnData)
+	
+	if (CustomDefaultPawnData && PawnExtComponent->GetPawnData<USkyraPawnData>() == nullptr)
 	{
-		SetPawnData(CustomDefaultPawnData);
+		
 		PawnExtComponent->SetPawnData(CustomDefaultPawnData);
 	}
+	
+	GivePawnDataToAbilitySystem(PawnExtComponent->GetPawnData<USkyraPawnData>());
+	
 	if (PawnExtComponent)
 	{
-		
-		if (AbilitySystemComponent)
+		//需要avatarSet的链路可以启用这个
+		/*if (AbilitySystemComponent)
 		{
 			AbilitySystemComponent->ClearActorInfo();
-		}
+		}*/
 		
 		PawnExtComponent->InitializeAbilitySystem(this->AbilitySystemComponent, this);
-		
-		
-		
-
 	}
+
 }
 
 void ASkyraCharacterWithAbilities::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
@@ -76,7 +89,7 @@ void ASkyraCharacterWithAbilities::GetLifetimeReplicatedProps(TArray<FLifetimePr
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
 }
 
-void ASkyraCharacterWithAbilities::SetPawnData(const USkyraPawnData* InPawnData)
+void ASkyraCharacterWithAbilities::GivePawnDataToAbilitySystem(const USkyraPawnData* InPawnData)
 {
 	check(InPawnData);
 

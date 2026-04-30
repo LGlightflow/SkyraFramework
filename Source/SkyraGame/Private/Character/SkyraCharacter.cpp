@@ -66,6 +66,7 @@ ASkyraCharacter::ASkyraCharacter(const FObjectInitializer& ObjectInitializer)
 	PawnExtComponent->OnAbilitySystemUninitialized_Register(FSimpleMulticastDelegate::FDelegate::CreateUObject(this, &ThisClass::OnAbilitySystemUninitialized));
 
 	HealthComponent = CreateDefaultSubobject<USkyraHealthComponent>(TEXT("HealthComponent"));
+	//CDO绑定了，但是实例可能没有被正确绑定
 	HealthComponent->OnDeathStarted.AddDynamic(this, &ThisClass::OnDeathStarted);
 	HealthComponent->OnDeathFinished.AddDynamic(this, &ThisClass::OnDeathFinished);
 	CameraComponent = CreateDefaultSubobject<USkyraCameraComponent>(TEXT("CameraComponent"));

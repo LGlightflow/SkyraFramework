@@ -101,8 +101,9 @@ void USkyraBotCreationComponent::SpawnOneBot()
 	SpawnInfo.SpawnCollisionHandlingOverride = ESpawnActorCollisionHandlingMethod::AlwaysSpawn;
 	SpawnInfo.OverrideLevel = GetComponentLevel();
 	SpawnInfo.ObjectFlags |= RF_Transient;
+	//生成Controller
 	AAIController* NewController = GetWorld()->SpawnActor<AAIController>(BotControllerClass, FVector::ZeroVector, FRotator::ZeroRotator, SpawnInfo);
-
+	
 	if (NewController != nullptr)
 	{
 		ASkyraGameMode* GameMode = GetGameMode<ASkyraGameMode>();

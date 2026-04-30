@@ -1,11 +1,11 @@
-// Copyright Epic Games, Inc. All Rights Reserved.
+﻿// Copyright Epic Games, Inc. All Rights Reserved.
 
 #pragma once
 
 #include "ModularAIController.h"
 #include "Teams/SkyraTeamAgentInterface.h"
 
-#include "SkyraPlayerBotController.generated.h"
+#include "SkyraAIController.generated.h"
 
 namespace ETeamAttitude { enum Type : int; }
 struct FGenericTeamId;
@@ -16,17 +16,18 @@ class UObject;
 struct FFrame;
 
 /**
- * ASkyraPlayerBotController
+ * ASkyraAIController
  *
- *	The controller class used by player bots in this project.
+ *	SkyraAIController是用于游戏中ai单位的aicontroller,和PlayerBotController不同，他负责和玩家行为差异很大的character
+ *	例如RPG中的小怪，boss,带生命或带能力的障碍物，防御塔、水晶等.....
  */
 UCLASS(Blueprintable)
-class SKYRAGAME_API ASkyraPlayerBotController : public AModularAIController, public ISkyraTeamAgentInterface
+class SKYRAGAME_API ASkyraAIController : public AModularAIController, public ISkyraTeamAgentInterface
 {
 	GENERATED_BODY()
 
 public:
-	ASkyraPlayerBotController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
+	ASkyraAIController(const FObjectInitializer& ObjectInitializer = FObjectInitializer::Get());
 
 	//~ISkyraTeamAgentInterface interface
 	virtual void SetGenericTeamId(const FGenericTeamId& NewTeamID) override;
@@ -36,6 +37,7 @@ public:
 	//~End of ISkyraTeamAgentInterface interface
 
 	// Attempts to restart this controller (e.g., to respawn it)
+	//TODO: 待修正，不适合与直接重生使用
 	void ServerRestartController();
 
 	//Update Team Attitude for the AI
@@ -47,26 +49,12 @@ public:
 
 private:
 	UFUNCTION()
-	void OnPlayerStateChangedTeam(UObject* TeamAgent, int32 OldTeam, int32 NewTeam);
+	void OnPawnChangedTeam(UObject* TeamAgent, int32 OldTeam, int32 NewTeam);
 
-protected:
-	// Called when the player state is set or cleared
-	virtual void OnPlayerStateChanged();
 
-private:
-	void BroadcastOnPlayerStateChanged();
-
-protected:	
-	//~AController interface
-	virtual void InitPlayerState() override;
-	virtual void CleanupPlayerState() override;
-	virtual void OnRep_PlayerState() override;
-	//~End of AController interface
 
 private:
 	UPROPERTY()
 	FOnSkyraTeamIndexChangedDelegate OnTeamChangedDelegate;
-
-	UPROPERTY()
-	TObjectPtr<APlayerState> LastSeenPlayerState;
+	
 };

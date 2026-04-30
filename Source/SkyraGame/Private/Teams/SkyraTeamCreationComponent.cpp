@@ -56,18 +56,21 @@ void USkyraTeamCreationComponent::OnExperienceLoaded(const USkyraExperienceDefin
 
 #if WITH_SERVER_CODE
 
+//队伍创建
 void USkyraTeamCreationComponent::ServerCreateTeams()
 {
-	for (const auto& KVP : TeamsToCreate)
+	for (const auto& KVP : DefaultTeamsToCreate)
 	{
 		const int32 TeamId = KVP.Key;
 		ServerCreateTeam(TeamId, KVP.Value);
 	}
 }
 
+//玩家分配队伍
 void USkyraTeamCreationComponent::ServerAssignPlayersToTeams()
 {
 	// Assign players that already exist to teams
+	//给已存在的玩家分配队伍
 	AGameStateBase* GameState = GetGameStateChecked<AGameStateBase>();
 	for (APlayerState* PS : GameState->PlayerArray)
 	{
@@ -78,9 +81,10 @@ void USkyraTeamCreationComponent::ServerAssignPlayersToTeams()
 	}
 
 	// Listen for new players logging in
+	// 新玩家进入自动分配队伍
 	ASkyraGameMode* GameMode = Cast<ASkyraGameMode>(GameState->AuthorityGameMode);
 	check(GameMode);
-
+	
 	GameMode->OnGameModePlayerInitialized.AddUObject(this, &ThisClass::OnPlayerInitialized);
 }
 
@@ -129,27 +133,32 @@ void USkyraTeamCreationComponent::ServerCreateTeam(int32 TeamId, USkyraTeamDispl
 	NewTeamPrivateInfo->SetTeamId(TeamId);
 }
 
+//队伍选择算法：获取最少人数的队伍id
 int32 USkyraTeamCreationComponent::GetLeastPopulatedTeamID() const
-{
-	const int32 NumTeams = TeamsToCreate.Num();
+{	
+	//初始化队伍人数
+	const int32 NumTeams = DefaultTeamsToCreate.Num();
 	if (NumTeams > 0)
 	{
 		TMap<int32, uint32> TeamMemberCounts;
 		TeamMemberCounts.Reserve(NumTeams);
-
-		for (const auto& KVP : TeamsToCreate)
+		
+		
+		for (const auto& KVP : DefaultTeamsToCreate)
 		{
 			const int32 TeamId = KVP.Key;
 			TeamMemberCounts.Add(TeamId, 0);
 		}
 
 		AGameStateBase* GameState = GetGameStateChecked<AGameStateBase>();
+		// 统计玩家
 		for (APlayerState* PS : GameState->PlayerArray)
 		{
 			if (ASkyraPlayerState* SkyraPS = Cast<ASkyraPlayerState>(PS))
 			{
 				const int32 PlayerTeamID = SkyraPS->GetTeamId();
-
+				
+				// 过滤没有分配队伍的
 				if ((PlayerTeamID != INDEX_NONE) && !SkyraPS->IsInactive())	// do not count unassigned or disconnected players
 				{
 					check(TeamMemberCounts.Contains(PlayerTeamID))
@@ -159,6 +168,7 @@ int32 USkyraTeamCreationComponent::GetLeastPopulatedTeamID() const
 		}
 
 		// sort by lowest team population, then by team ID
+		// 选人数最少的队伍，如果人数一致则选teamid小的
 		int32 BestTeamId = INDEX_NONE;
 		uint32 BestPlayerCount = TNumericLimits<uint32>::Max();
 		for (const auto& KVP : TeamMemberCounts)

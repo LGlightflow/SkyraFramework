@@ -68,7 +68,6 @@ ASkyraCharacter::ASkyraCharacter(const FObjectInitializer& ObjectInitializer)
 	HealthComponent = CreateDefaultSubobject<USkyraHealthComponent>(TEXT("HealthComponent"));
 	HealthComponent->OnDeathStarted.AddDynamic(this, &ThisClass::OnDeathStarted);
 	HealthComponent->OnDeathFinished.AddDynamic(this, &ThisClass::OnDeathFinished);
-
 	CameraComponent = CreateDefaultSubobject<USkyraCameraComponent>(TEXT("CameraComponent"));
 	CameraComponent->SetRelativeLocation(FVector(-300.0f, 0.0f, 75.0f));
 

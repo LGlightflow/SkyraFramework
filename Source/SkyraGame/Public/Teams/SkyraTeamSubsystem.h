@@ -18,6 +18,7 @@ struct FGameplayTag;
 
 DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnSkyraTeamDisplayAssetChangedDelegate, const USkyraTeamDisplayAsset*, DisplayAsset);
 
+//队伍数据容器
 USTRUCT()
 struct FSkyraTeamTrackingInfo
 {
@@ -80,6 +81,7 @@ public:
 	bool ChangeTeamForActor(AActor* ActorToChange, int32 NewTeamId);
 
 	// Returns the team this object belongs to, or INDEX_NONE if it is not part of a team
+	// 队伍查询
 	int32 FindTeamFromObject(const UObject* TestObject) const;
 
 	// Returns the associated player state for this actor, or INDEX_NONE if it is not associated with a player

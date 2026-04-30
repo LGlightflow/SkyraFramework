@@ -164,7 +164,8 @@ private:
 
 	UPROPERTY()
 	FOnSkyraTeamIndexChangedDelegate OnTeamChangedDelegate;
-
+	
+	// TODO: 添加一个组件之类的，对这个变量操作进行对队伍的关系管理（敌对友好中立）
 	UPROPERTY(ReplicatedUsing=OnRep_MyTeamID)
 	FGenericTeamId MyTeamID;
 

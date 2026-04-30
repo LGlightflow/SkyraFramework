@@ -15,7 +15,7 @@ class APlayerController;
 class USkyraTeamDisplayAsset;
 
 UCLASS(Blueprintable)
-class USkyraTeamCreationComponent : public UGameStateComponent
+class SKYRAGAME_API USkyraTeamCreationComponent : public UGameStateComponent
 {
 	GENERATED_BODY()
 
@@ -37,8 +37,9 @@ private:
 
 protected:
 	// List of teams to create (id to display asset mapping, the display asset can be left unset if desired)
+	// 默认的队伍
 	UPROPERTY(EditDefaultsOnly, Category = Teams)
-	TMap<uint8, TObjectPtr<USkyraTeamDisplayAsset>> TeamsToCreate;
+	TMap<uint8, TObjectPtr<USkyraTeamDisplayAsset>> DefaultTeamsToCreate;
 
 	UPROPERTY(EditDefaultsOnly, Category=Teams)
 	TSubclassOf<ASkyraTeamPublicInfo> PublicTeamInfoClass;
@@ -53,10 +54,12 @@ protected:
 
 	/** Sets the team ID for the given player state. Spectator-only player states will be stripped of any team association. */
 	virtual void ServerChooseTeamForPlayer(ASkyraPlayerState* PS);
-
+	
+	void ServerCreateTeam(int32 TeamId, USkyraTeamDisplayAsset* DisplayAsset);
+	
 private:
 	void OnPlayerInitialized(AGameModeBase* GameMode, AController* NewPlayer);
-	void ServerCreateTeam(int32 TeamId, USkyraTeamDisplayAsset* DisplayAsset);
+	
 
 	/** returns the Team ID with the fewest active players, or INDEX_NONE if there are no valid teams */
 	int32 GetLeastPopulatedTeamID() const;

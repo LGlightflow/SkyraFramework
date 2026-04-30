@@ -36,6 +36,10 @@ void USkyraAbilitySystemComponent::EndPlay(const EEndPlayReason::Type EndPlayRea
 	Super::EndPlay(EndPlayReason);
 }
 
+// 初始化AbilityActorInfo
+// 确定Ability 在执行时“我是谁 + 我控制谁 + 我作用在哪个 Actor 上”
+//例如一般的玩家OwnerActor = PlayerState AvatarActor = Character(Pawn)
+//也会存在OwnerActor 和AvatarActor 相同的情况
 void USkyraAbilitySystemComponent::InitAbilityActorInfo(AActor* InOwnerActor, AActor* InAvatarActor)
 {
 	FGameplayAbilityActorInfo* ActorInfo = AbilityActorInfo.Get();

@@ -22,10 +22,17 @@ public:
 	ASkyraCharacterWithAbilities(const FObjectInitializer& ObjectInitializer);
 
 	virtual void PostInitializeComponents() override;
-
+	
 	virtual UAbilitySystemComponent* GetAbilitySystemComponent() const override;
 	
+	//~AActor interface	
 	virtual void BeginPlay() override;
+
+	virtual void GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const override;
+	//~End of AActor interface
+protected:
+	virtual void SetPawnData(const USkyraPawnData* InPawnData);
+
 private:
 
 	// The ability system component sub-object used by player characters.
@@ -42,5 +49,7 @@ private:
 	UPROPERTY()
 	TObjectPtr<const class USkyraCombatSet> CombatSet;
 	
+protected:
+	static const FName NAME_CharacterWithSkyraAbilityReady;
 
 };

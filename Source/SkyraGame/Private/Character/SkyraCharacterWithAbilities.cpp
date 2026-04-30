@@ -2,14 +2,20 @@
 
 #include "SkyraCharacterWithAbilities.h"
 
+#include "SkyraAbilitySet.h"
+#include "SkyraLogChannels.h"
 #include "SkyraPawnExtensionComponent.h"
 #include "AbilitySystem/Attributes/SkyraCombatSet.h"
 #include "AbilitySystem/Attributes/SkyraHealthSet.h"
 #include "AbilitySystem/SkyraAbilitySystemComponent.h"
 #include "Async/TaskGraphInterfaces.h"
 #include "Character/SkyraPawnData.h"
+#include "Components/GameFrameworkComponentManager.h"
+#include "Net/UnrealNetwork.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(SkyraCharacterWithAbilities)
+
+const FName ASkyraCharacterWithAbilities::NAME_CharacterWithSkyraAbilityReady("SkyraAbilitiesReady");
 
 ASkyraCharacterWithAbilities::ASkyraCharacterWithAbilities(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer)
@@ -42,14 +48,51 @@ UAbilitySystemComponent* ASkyraCharacterWithAbilities::GetAbilitySystemComponent
 void ASkyraCharacterWithAbilities::BeginPlay()
 {
 	Super::BeginPlay();
+
+		
+	if (CustomDefaultPawnData)
+	{
+		SetPawnData(CustomDefaultPawnData);
+		PawnExtComponent->SetPawnData(CustomDefaultPawnData);
+	}
 	if (PawnExtComponent)
 	{
-		PawnExtComponent->InitializeAbilitySystem(AbilitySystemComponent, this);
 		
-		if (CustomDefaultPawnData)
+		if (AbilitySystemComponent)
 		{
-			PawnExtComponent->K2_ForceUpdatePawnData(CustomDefaultPawnData);
+			AbilitySystemComponent->ClearActorInfo();
 		}
 		
+		PawnExtComponent->InitializeAbilitySystem(this->AbilitySystemComponent, this);
+		
+		
+		
+
 	}
+}
+
+void ASkyraCharacterWithAbilities::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
+{
+	Super::GetLifetimeReplicatedProps(OutLifetimeProps);
+}
+
+void ASkyraCharacterWithAbilities::SetPawnData(const USkyraPawnData* InPawnData)
+{
+	check(InPawnData);
+
+	if (GetLocalRole() != ROLE_Authority)
+	{
+		return;
+	}
+	for (const USkyraAbilitySet* AbilitySet : InPawnData->AbilitySets)
+	{
+		if (AbilitySet)
+		{
+			AbilitySet->GiveToAbilitySystem(AbilitySystemComponent, nullptr);
+		}
+	}
+
+	UGameFrameworkComponentManager::SendGameFrameworkComponentExtensionEvent(this, NAME_CharacterWithSkyraAbilityReady);
+	
+	ForceNetUpdate();
 }

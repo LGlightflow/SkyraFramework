@@ -153,6 +153,7 @@ bool USkyraTeamSubsystem::ChangeTeamForActor(AActor* ActorToChange, int32 NewTea
 int32 USkyraTeamSubsystem::FindTeamFromObject(const UObject* TestObject) const
 {
 	// See if it's directly a team agent
+	//是否实现 TeamInterface
 	if (const ISkyraTeamAgentInterface* ObjectWithTeamInterface = Cast<ISkyraTeamAgentInterface>(TestObject))
 	{
 		return GenericTeamIdToInteger(ObjectWithTeamInterface->GetGenericTeamId());
@@ -161,18 +162,21 @@ int32 USkyraTeamSubsystem::FindTeamFromObject(const UObject* TestObject) const
 	if (const AActor* TestActor = Cast<const AActor>(TestObject))
 	{
 		// See if the instigator is a team actor
+		//Actor->Instigator 是否有队伍
 		if (const ISkyraTeamAgentInterface* InstigatorWithTeamInterface = Cast<ISkyraTeamAgentInterface>(TestActor->GetInstigator()))
 		{
 			return GenericTeamIdToInteger(InstigatorWithTeamInterface->GetGenericTeamId());
 		}
 
 		// TeamInfo actors don't actually have the team interface, so they need a special case
+		//是否 TeamInfo Actor
 		if (const ASkyraTeamInfoBase* TeamInfo = Cast<ASkyraTeamInfoBase>(TestActor))
 		{
 			return TeamInfo->GetTeamId();
 		}
 
 		// Fall back to finding the associated player state
+		//是否 PlayerState
 		if (const ASkyraPlayerState* SkyraPS = FindPlayerStateFromActor(TestActor))
 		{
 			return SkyraPS->GetTeamId();
@@ -182,6 +186,7 @@ int32 USkyraTeamSubsystem::FindTeamFromObject(const UObject* TestObject) const
 	return INDEX_NONE;
 }
 
+//把 Actor 映射到 Player
 const ASkyraPlayerState* USkyraTeamSubsystem::FindPlayerStateFromActor(const AActor* PossibleTeamActor) const
 {
 	if (PossibleTeamActor != nullptr)
@@ -219,6 +224,7 @@ const ASkyraPlayerState* USkyraTeamSubsystem::FindPlayerStateFromActor(const AAc
 	return nullptr;
 }
 
+//队伍比较
 ESkyraTeamComparison USkyraTeamSubsystem::CompareTeams(const UObject* A, const UObject* B, int32& TeamIdA, int32& TeamIdB) const
 {
 	TeamIdA = FindTeamFromObject(Cast<const AActor>(A));

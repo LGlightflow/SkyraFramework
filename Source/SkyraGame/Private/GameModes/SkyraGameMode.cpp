@@ -27,6 +27,7 @@
 #include "CommonSessionSubsystem.h"
 #include "TimerManager.h"
 #include "GameMapsSettings.h"
+#include "SkyraAIController.h"
 
 #include UE_INLINE_GENERATED_CPP_BY_NAME(SkyraGameMode)
 
@@ -484,6 +485,10 @@ void ASkyraGameMode::RequestPlayerRestartNextFrame(AController* Controller, bool
 	{
 		GetWorldTimerManager().SetTimerForNextTick(BotController, &ASkyraPlayerBotController::ServerRestartController);
 	}
+	/*else if (ASkyraAIController* AIController = Cast<ASkyraAIController>(Controller))
+	{
+		GetWorldTimerManager().SetTimerForNextTick(AIController, &ASkyraAIController::ServerRestartController);
+	}*/
 }
 
 bool ASkyraGameMode::UpdatePlayerStartSpot(AController* Player, const FString& Portal, FString& OutErrorMessage)

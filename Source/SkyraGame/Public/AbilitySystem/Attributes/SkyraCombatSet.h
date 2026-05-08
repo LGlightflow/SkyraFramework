@@ -28,7 +28,9 @@ public:
 
 	ATTRIBUTE_ACCESSORS(USkyraCombatSet, BaseDamage);
 	ATTRIBUTE_ACCESSORS(USkyraCombatSet, BaseHeal);
-
+	ATTRIBUTE_ACCESSORS(USkyraCombatSet, IncomingDamageMultiplier);
+	ATTRIBUTE_ACCESSORS(USkyraCombatSet, IncomingHealingMultiplier);
+	ATTRIBUTE_ACCESSORS(USkyraCombatSet, Armor);
 protected:
 
 	UFUNCTION()
@@ -36,7 +38,22 @@ protected:
 
 	UFUNCTION()
 	void OnRep_BaseHeal(const FGameplayAttributeData& OldValue);
-
+	
+	UFUNCTION()
+	void OnRep_IncomingDamageMultiplier(const FGameplayAttributeData& OldValue);
+	
+	UFUNCTION()
+	void OnRep_IncomingHealingMultiplier(const FGameplayAttributeData& OldValue);
+	
+	UFUNCTION()
+	void OnRep_CriticalRate(const FGameplayAttributeData& OldValue);
+	
+	UFUNCTION()
+	void OnRep_CriticalDamageMultiplier(const FGameplayAttributeData& OldValue);
+	
+	UFUNCTION()
+	void OnRep_Armor(const FGameplayAttributeData& OldValue);
+	
 private:
 
 	// The base amount of damage to apply in the damage execution.
@@ -46,4 +63,32 @@ private:
 	// The base amount of healing to apply in the heal execution.
 	UPROPERTY(BlueprintReadOnly, ReplicatedUsing = OnRep_BaseHeal, Category = "Skyra|Combat", Meta = (AllowPrivateAccess = true))
 	FGameplayAttributeData BaseHeal;
+	
+	// Damage multiplier to me
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_IncomingDamageMultiplier, Category="Skyra|Combat",Meta=(AllowPrivateAccess="true"))
+	FGameplayAttributeData IncomingDamageMultiplier;
+
+	// Healing multiplier to me
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_IncomingHealingMultiplier, Category="Skyra|Combat",Meta=(AllowPrivateAccess="true"))
+	FGameplayAttributeData IncomingHealingMultiplier;
+	
+	//damage multiplier from me
+	UPROPERTY(BlueprintReadOnly,Category="Skyra|Combat", Meta=(AllowPrivateAccess="true"))
+	FGameplayAttributeData OutgoingDamageMultiplier;
+	
+	// Healing multiplier from me
+	UPROPERTY(BlueprintReadOnly, Category="Skyra|Combat", Meta=(AllowPrivateAccess="true"))
+	FGameplayAttributeData OutgoingHealingMultiplier;
+	
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_CriticalRate, Category="Skyra|Combat",Meta=(AllowPrivateAccess="true"))
+	FGameplayAttributeData CriticalRate;
+	
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_CriticalDamageMultiplier, Category="Skyra|Combat",Meta=(AllowPrivateAccess="true"))
+	FGameplayAttributeData CriticalDamageMultiplier;
+	
+	UPROPERTY(BlueprintReadOnly, ReplicatedUsing=OnRep_Armor, Category="Skyra|Combat",Meta=(AllowPrivateAccess="true"))
+	FGameplayAttributeData Armor;
+	
+	
+	
 };

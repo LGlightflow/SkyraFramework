@@ -15,11 +15,11 @@ USkyraCombatSet::USkyraCombatSet()
 	, BaseHeal(0.0f)
 	, IncomingDamageMultiplier(1.f)
 	, IncomingHealingMultiplier(1.f)
-	, Armor(1.f)
 	,OutgoingDamageMultiplier(1.0f)
 	,OutgoingHealingMultiplier(1.0f)
 	,CriticalRate(0.f)
 	,CriticalDamageMultiplier(1.f)
+	, Armor(1.f)
 {
 }
 

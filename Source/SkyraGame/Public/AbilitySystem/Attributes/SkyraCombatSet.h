@@ -30,6 +30,8 @@ public:
 	ATTRIBUTE_ACCESSORS(USkyraCombatSet, BaseHeal);
 	ATTRIBUTE_ACCESSORS(USkyraCombatSet, IncomingDamageMultiplier);
 	ATTRIBUTE_ACCESSORS(USkyraCombatSet, IncomingHealingMultiplier);
+	ATTRIBUTE_ACCESSORS(USkyraCombatSet, CriticalRate);
+	ATTRIBUTE_ACCESSORS(USkyraCombatSet, CriticalDamageMultiplier);
 	ATTRIBUTE_ACCESSORS(USkyraCombatSet, Armor);
 protected:
 

@@ -293,11 +293,13 @@ void USkyraPawnExtensionComponent::OnActorInitStateChanged(const FActorInitState
 	}
 }
 
+// 当OnAbilitySystemInitialized调用后触发回调
 void USkyraPawnExtensionComponent::OnAbilitySystemInitialized_RegisterAndCall(FSimpleMulticastDelegate::FDelegate Delegate)
 {
+	// 防止重复绑定
 	if (!OnAbilitySystemInitialized.IsBoundToObject(Delegate.GetUObject()))
 	{
-		OnAbilitySystemInitialized.Add(Delegate);
+		OnAbilitySystemInitialized.Add(Delegate); //正常注册监听
 	}
 
 	if (AbilitySystemComponent)

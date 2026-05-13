@@ -90,7 +90,7 @@ namespace SkyraGameplayTags
 	
 
 	
-	// 这个是射击特有的Tag,后面要考虑分模块从这里分走
+	/*// 这个是射击特有的Tag,后面要考虑分模块从这里分走
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_ActivateFail_MagazineFull);
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Ability_ActivateFail_NoSpareAmmo);
 	
@@ -123,7 +123,7 @@ namespace SkyraGameplayTags
 	
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shooter_Weapon_MagazineAmmo);
 	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shooter_Weapon_MagazineSize);
-	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shooter_Weapon_SpareAmmo);
+	SKYRAGAME_API	UE_DECLARE_GAMEPLAY_TAG_EXTERN(Shooter_Weapon_SpareAmmo);*/
 	
 	
 	

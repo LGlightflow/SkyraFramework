@@ -123,7 +123,7 @@ public:
 	// ASkyraCharacter* GetSkyraCharacterFromActorInfo() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Skyra|Ability")
-	USkyraPawnControlComponent* GetHeroComponentFromActorInfo() const;
+	USkyraPawnControlComponent* GetPawnControlComponentFromActorInfo() const;
 
 	ESkyraAbilityActivationPolicy GetActivationPolicy() const { return ActivationPolicy; }
 	ESkyraAbilityActivationGroup GetActivationGroup() const { return ActivationGroup; }

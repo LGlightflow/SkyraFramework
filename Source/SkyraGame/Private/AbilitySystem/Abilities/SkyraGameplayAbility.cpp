@@ -94,7 +94,7 @@ AController* USkyraGameplayAbility::GetControllerFromActorInfo() const
 // 	return (CurrentActorInfo ? Cast<ASkyraCharacter>(CurrentActorInfo->AvatarActor.Get()) : nullptr);
 // }
 
-USkyraPawnControlComponent* USkyraGameplayAbility::GetHeroComponentFromActorInfo() const
+USkyraPawnControlComponent* USkyraGameplayAbility::GetPawnControlComponentFromActorInfo() const
 {
 	return (CurrentActorInfo ? USkyraPawnControlComponent::FindPawnControlComponent(CurrentActorInfo->AvatarActor.Get()) : nullptr);
 }
@@ -522,7 +522,7 @@ void USkyraGameplayAbility::SetCameraMode(TSubclassOf<USkyraCameraMode> CameraMo
 {
 	ENSURE_ABILITY_IS_INSTANTIATED_OR_RETURN(SetCameraMode, );
 
-	if (USkyraPawnControlComponent* HeroComponent = GetHeroComponentFromActorInfo())
+	if (USkyraPawnControlComponent* HeroComponent = GetPawnControlComponentFromActorInfo())
 	{
 		HeroComponent->SetAbilityCameraMode(CameraMode, CurrentSpecHandle);
 		ActiveCameraMode = CameraMode;
@@ -535,7 +535,7 @@ void USkyraGameplayAbility::ClearCameraMode()
 
 	if (ActiveCameraMode)
 	{
-		if (USkyraPawnControlComponent* HeroComponent = GetHeroComponentFromActorInfo())
+		if (USkyraPawnControlComponent* HeroComponent = GetPawnControlComponentFromActorInfo())
 		{
 			HeroComponent->ClearAbilityCameraMode(CurrentSpecHandle);
 		}

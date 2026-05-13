@@ -15,15 +15,11 @@ void USkyraCameraMode_TopDownFollow::UpdateView(float DeltaTime)
 	AActor* Target = GetTargetActor();
 	if (!Target)
 		return;
-
-	//----------------------------------
+	
 	// 1. Pivot（角色位置）
-	//----------------------------------
 	FVector PivotLocation = Target->GetActorLocation();
-
-	//----------------------------------
+	
 	// 2. Rotation（俯视）
-	//----------------------------------
 	float Yaw = 0.f;
 
 	if (bFollowPawnYaw)
@@ -37,10 +33,8 @@ void USkyraCameraMode_TopDownFollow::UpdateView(float DeltaTime)
 	// 3. Desired Camera Location
 	//----------------------------------
 	FVector DesiredLocation = PivotLocation - CameraRot.Vector() * CameraDistance;
-
-	//----------------------------------
-	// 4. 平滑（关键！否则会抖）
-	//----------------------------------
+	
+	// 4. 平滑（防抖）
 	if (SmoothedLocation.IsZero())
 	{
 		SmoothedLocation = DesiredLocation;
@@ -55,9 +49,8 @@ void USkyraCameraMode_TopDownFollow::UpdateView(float DeltaTime)
 		);
 	}
 
-	//----------------------------------
+
 	// 5. 输出 View
-	//----------------------------------
 	View.Location = SmoothedLocation;
 	View.Rotation = CameraRot;
 	View.ControlRotation = CameraRot;

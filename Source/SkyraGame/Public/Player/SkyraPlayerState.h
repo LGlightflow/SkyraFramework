@@ -158,6 +158,9 @@ private:
 	// Combat attribute set used by this actor.
 	UPROPERTY()
 	TObjectPtr<const class USkyraCombatSet> CombatSet;
+	
+	UPROPERTY()
+	TObjectPtr<const class USkyraLevelXpSet> LevelXPSet;
 
 	UPROPERTY(Replicated)
 	ESkyraPlayerConnectionType MyPlayerConnectionType;

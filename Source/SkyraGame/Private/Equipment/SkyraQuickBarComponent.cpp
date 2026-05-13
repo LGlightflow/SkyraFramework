@@ -108,6 +108,9 @@ void USkyraQuickBarComponent::EquipItemInSlot()
 	}
 }
 
+/**
+ *
+ */
 void USkyraQuickBarComponent::UnequipItemInSlot()
 {
 	if (USkyraEquipmentManagerComponent* EquipmentManager = FindEquipmentManager())

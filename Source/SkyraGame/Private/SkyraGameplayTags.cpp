@@ -96,7 +96,7 @@ namespace SkyraGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayCue_Pawn_Spawn,"GameplayCue.Pawn.Spawn","");
 	
 	
-	// 射击模块 Tags
+	/*// 射击模块 Tags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_ActivateFail_MagazineFull, "Ability.ActivateFail.MagazineFull", "Cannot reload, magazine is already full");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Ability_ActivateFail_NoSpareAmmo, "Ability.ActivateFail.NoSpareAmmo", "Cannot reload, no spare ammo available");
 	
@@ -129,7 +129,7 @@ namespace SkyraGameplayTags
 	// 武器弹药属性
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Shooter_Weapon_MagazineAmmo, "Shooter.Weapon.MagazineAmmo", "Current ammo in the magazine");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Shooter_Weapon_MagazineSize, "Shooter.Weapon.MagazineSize", "Max ammo capacity of the magazine");
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Shooter_Weapon_SpareAmmo, "Shooter.Weapon.SpareAmmo", "Spare ammo available for reload");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Shooter_Weapon_SpareAmmo, "Shooter.Weapon.SpareAmmo", "Spare ammo available for reload");*/
 
 	
 	FGameplayTag FindTagByString(const FString& TagString, bool bMatchPartialString)

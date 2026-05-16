@@ -84,6 +84,11 @@ void ASkyraCharacterWithAbilities::BeginPlay()
 
 }
 
+void ASkyraCharacterWithAbilities::EndPlay(const EEndPlayReason::Type EndPlayReason)
+{
+	Super::EndPlay(EndPlayReason);
+}
+
 void ASkyraCharacterWithAbilities::GetLifetimeReplicatedProps(TArray<FLifetimeProperty>& OutLifetimeProps) const
 {
 	Super::GetLifetimeReplicatedProps(OutLifetimeProps);

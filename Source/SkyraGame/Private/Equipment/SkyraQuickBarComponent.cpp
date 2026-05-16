@@ -123,6 +123,9 @@ void USkyraQuickBarComponent::UnequipItemInSlot()
 	}
 }
 
+/**
+ *
+ */
 USkyraEquipmentManagerComponent* USkyraQuickBarComponent::FindEquipmentManager() const
 {
 	if (AController* OwnerController = Cast<AController>(GetOwner()))

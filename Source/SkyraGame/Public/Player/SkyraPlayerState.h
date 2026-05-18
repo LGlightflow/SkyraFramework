@@ -159,8 +159,8 @@ private:
 	UPROPERTY()
 	TObjectPtr<const class USkyraCombatSet> CombatSet;
 	
-	UPROPERTY()
-	TObjectPtr<const class USkyraLevelXpSet> LevelXPSet;
+	/*UPROPERTY()
+	TObjectPtr<const class USkyraLevelXpSet> LevelXPSet;*/
 
 	UPROPERTY(Replicated)
 	ESkyraPlayerConnectionType MyPlayerConnectionType;

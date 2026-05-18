@@ -76,7 +76,7 @@ namespace SkyraGameplayTags
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Cosmetic_AnimationStyle,"Cosmetic.AnimationStyle","");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(Cosmetic_BodyStyle,"Cosmetic.BodyStyle","");
 	
-	UE_DEFINE_GAMEPLAY_TAG_COMMENT(PawnType_Player,"Pawn.Player","");
+	UE_DEFINE_GAMEPLAY_TAG_COMMENT(PawnType_Player,"PawnType.Player","");
 	
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_DamageTrait_Instant , "GameplayEffect.DamageTrait.Instant","");
 	UE_DEFINE_GAMEPLAY_TAG_COMMENT(GameplayEffect_DamageTrait_Periodic,"GameplayEffect.DamageTrait.Periodic","");

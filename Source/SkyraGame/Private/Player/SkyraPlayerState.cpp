@@ -13,7 +13,7 @@
 #include "GameFramework/GameplayMessageSubsystem.h"
 #include "GameModes/SkyraExperienceManagerComponent.h"
 //@TODO: Would like to isolate this a bit better to get the pawn data in here without this having to know about other stuff
-#include "SkyraLevelXpSet.h"
+//#include "SkyraLevelXpSet.h"
 #include "GameModes/SkyraGameMode.h"
 #include "SkyraLogChannels.h"
 #include "SkyraPlayerController.h"
@@ -39,7 +39,7 @@ ASkyraPlayerState::ASkyraPlayerState(const FObjectInitializer& ObjectInitializer
 	// These attribute sets will be detected by AbilitySystemComponent::InitializeComponent. Keeping a reference so that the sets don't get garbage collected before that.
 	HealthSet = CreateDefaultSubobject<USkyraHealthSet>(TEXT("HealthSet"));
 	CombatSet = CreateDefaultSubobject<USkyraCombatSet>(TEXT("CombatSet"));
-	LevelXPSet = CreateDefaultSubobject<USkyraLevelXpSet>(TEXT("LevelXPSet"));
+	//LevelXPSet = CreateDefaultSubobject<USkyraLevelXpSet>(TEXT("LevelXPSet"));
 	
 	// AbilitySystemComponent needs to be updated at a high frequency.
 	NetUpdateFrequency = 100.0f;

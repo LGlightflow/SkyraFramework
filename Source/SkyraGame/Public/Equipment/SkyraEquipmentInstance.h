@@ -15,6 +15,17 @@ struct FSkyraEquipmentActorToSpawn;
  * USkyraEquipmentInstance
  *
  * A piece of equipment spawned and applied to a pawn
+ * 
+ *  装备实例对象。
+ *
+ * 作用：
+ *  - 表示“已经装备到 Pawn 身上的一份装备”
+ *  - 生命周期通常跟随 Pawn
+ *  - 可生成附属 Actor（枪械、特效、护盾等）
+ *  - 支持网络同步
+ *
+ * 常见 Outer：
+ *  - Pawn
  */
 UCLASS(BlueprintType, Blueprintable)
 class USkyraEquipmentInstance : public UObject

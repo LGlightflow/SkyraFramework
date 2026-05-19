@@ -85,11 +85,14 @@ void USkyraQuickBarComponent::CycleActiveSlotBackward()
 
 void USkyraQuickBarComponent::EquipItemInSlot()
 {
+	// 必须有合法槽位
 	check(Slots.IsValidIndex(ActiveSlotIndex));
+	// 不允许重复装备
 	check(EquippedItem == nullptr);
 
 	if (USkyraInventoryItemInstance* SlotItem = Slots[ActiveSlotIndex])
 	{
+		// 从 InventoryItem 中找“可装备描述”
 		if (const UInventoryFragment_EquippableItem* EquipInfo = SlotItem->FindFragmentByClass<UInventoryFragment_EquippableItem>())
 		{
 			TSubclassOf<USkyraEquipmentDefinition> EquipDef = EquipInfo->EquipmentDefinition;
@@ -97,9 +100,11 @@ void USkyraQuickBarComponent::EquipItemInSlot()
 			{
 				if (USkyraEquipmentManagerComponent* EquipmentManager = FindEquipmentManager())
 				{
+					// 真正 Spawn EquipmentInstance
 					EquippedItem = EquipmentManager->EquipItem(EquipDef);
 					if (EquippedItem != nullptr)
 					{
+						// 绑定来源（用于回溯 / UI / 逻辑）
 						EquippedItem->SetInstigator(SlotItem);
 					}
 				}

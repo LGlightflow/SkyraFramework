@@ -18,6 +18,7 @@ class UInputDeviceProperty;
  * USkyraWeaponInstance
  *
  * A piece of equipment representing a weapon spawned and applied to a pawn
+ * 被装备后的武器运行时实例
  */
 UCLASS()
 class USkyraWeaponInstance : public USkyraEquipmentInstance
